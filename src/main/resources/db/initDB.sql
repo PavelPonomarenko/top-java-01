@@ -1,0 +1,21 @@
+DROP TABLE IF EXISTS USER_ROLES;
+DROP TABLE IF EXISTS USERS;
+
+
+CREATE TABLE USERS(
+    id         INTEGER AUTO_INCREMENT PRIMARY KEY,
+    name       VARCHAR(255),
+    email      VARCHAR(255),
+    password   VARCHAR(255),
+    registered TIMESTAMP DEFAULT now(),
+    enabled    BOOL      DEFAULT TRUE,
+--    CONSTRAINT UNIQUE users_email ON USERS(email)
+    CONSTRAINT UNIQUE USERS (email));
+
+CREATE TABLE USER_ROLES(
+    user_id INTEGER NOT NULL,
+    role    VARCHAR(255),
+    CONSTRAINT user_role_idx UNIQUE (user_id, role),
+    CONSTRAINT FK_USER_ROLES_USERS FOREIGN KEY USER_ROLES (user_id) REFERENCES USERS (id)
+);
+
