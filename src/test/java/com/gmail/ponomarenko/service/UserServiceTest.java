@@ -8,6 +8,7 @@ import com.gmail.ponomarenko.repository.mock.MockUserMealRepositoryImpl;
 import com.gmail.ponomarenko.repository.mock.MockUserRepositoryImpl;
 import com.gmail.ponomarenko.util.DbPopulator;
 import com.gmail.ponomarenko.util.exception.NotFoundException;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,31 +32,35 @@ public class UserServiceTest {
 
     @Autowired
     protected UserService service;
+
     @Autowired
     private DbPopulator dbPopulator;
 
     @Before
     public void setUp() throws Exception {
+        System.out.println("----> Test started <----");
         dbPopulator.execute();
+    }
+
+    @After
+    public void after() {
+        System.out.println("----> Test finished <----");
     }
 
     @Test
     public void testSave() throws Exception {
-        TestUser tu = new TestUser(null, "Vasia", "New@gamil.com", "newpass");
-
+        TestUser tu = new TestUser("New", "new@gmail.com", "newPass", Role.ROLE_USER);
         User created = service.save(tu.asUser());
         tu.setId(created.getId());
-        service.getAll().forEach(System.out::println);
-//        System.err.println(created);
-        MATCHER.assertListEquals(Arrays.asList(USER, ADMIN, tu.asUser()), service.getAll());
-
+        MATCHER.assertListEquals(Arrays.asList(ADMIN, tu, USER), service.getAll());
     }
 
     @Test(expected = DataAccessException.class)
     public void testDuplicateMailSave() throws Exception {
-        service.save(new UserTestData.TestUser(3,"Duplicate", "user@gmail.com", "newPass").asUser());
+        service.save(new TestUser("Duplicate", "user@yandex.ru", "newPass", Role.ROLE_USER).asUser());
     }
 
+    @Test
     public void testDelete() throws Exception {
         service.delete(BaseEntity.START_SEQ);
         MATCHER.assertListEquals(Collections.singletonList(ADMIN), service.getAll());
@@ -67,15 +72,16 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testGet() {
+    public void testGet() throws Exception {
         User user = service.get(BaseEntity.START_SEQ);
         MATCHER.assertEquals(USER, user);
     }
 
     @Test
     public void testGetByEmail() throws Exception {
-        User user = service.getByEmail("user @gmail.com");
+        User user = service.getByEmail("user@yandex.ru");
         MATCHER.assertEquals(USER, user);
+
     }
 
     @Test
@@ -91,4 +97,5 @@ public class UserServiceTest {
         service.update(updated.asUser());
         MATCHER.assertEquals(updated, service.get(BaseEntity.START_SEQ));
     }
+
 }

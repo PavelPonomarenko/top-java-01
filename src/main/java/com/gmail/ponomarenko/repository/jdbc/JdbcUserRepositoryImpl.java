@@ -36,20 +36,21 @@ public class JdbcUserRepositoryImpl implements UserRepository {
 
     @Override
     public User save(User user) {
-        Raw map = new MapSqlParameterSource()
+        MapSqlParameterSource map = new MapSqlParameterSource()
                 .addValue("id", user.getId())
                 .addValue("name", user.getName())
-                .addValue("email", "2@test.com")
+                .addValue("email", user.getEmail())
                 .addValue("password", user.getPassword())
-                .addValue("registered", new Timestamp(user.getRegistered().getTime()))
+                .addValue("registered", user.getRegistered())
                 .addValue("enabled", user.isEnabled());
 
         if (user.isNew()) {
-            Number newKey = jdbcTemplate.query()(map);
+            Number newKey = insertUser.executeAndReturnKey(map);
             user.setId(newKey.intValue());
         } else {
             namedParameterJdbcTemplate.update(
-                    "UPDATE users SET name=:name, email=:email, password=:password, registered=:registered, enabled=:enabled WHERE id=:id", map);
+                    "UPDATE users SET name=:name, email=:email, password=:password," +
+                            " registered=:registered, enabled=:enabled WHERE id=:id", map);
         }
         return user;
     }

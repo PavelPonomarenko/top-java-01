@@ -10,7 +10,7 @@ public class SpringMain {
     public static void main(String[] args) {
 
         ConfigurableApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/spring-app.xml");
-//        System.out.println("\n" + Arrays.toString(applicationContext.getBeanDefinitionNames()) + "\n");
+        System.out.println("\n" + Arrays.toString(applicationContext.getBeanDefinitionNames()) + "\n");
 //        AdminUserRestController adminUserRestController = applicationContext.getBean(AdminUserRestController.class);
 //        adminUserRestController.delete(1);
 

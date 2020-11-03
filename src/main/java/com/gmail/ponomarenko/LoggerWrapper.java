@@ -44,9 +44,9 @@ public class LoggerWrapper {
         return logger.isDebugEnabled();
     }
 
-//    public IllegalStateException getIllegalStateException(String msg) {
-//        return getIllegalStateException(msg);
-//    }
+    public IllegalStateException getIllegalStateException(String msg) {
+        return getIllegalStateException(msg);
+    }
 
     public IllegalStateException getIllegalStateException(String msg, Throwable e) {
         logger.error(msg, e);

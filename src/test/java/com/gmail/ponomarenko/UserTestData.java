@@ -7,41 +7,33 @@ import com.gmail.ponomarenko.model.User;
 
 import java.util.Date;
 import java.util.EnumSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 
 public class UserTestData {
     private static final LoggerWrapper LOG = LoggerWrapper.get(UserTestData.class);
 
-    public static final TestUser USER = new TestUser(BaseEntity.START_SEQ, "User", "user@gamil.com", "password");
-    public static final TestUser ADMIN = new TestUser(BaseEntity.START_SEQ + 1, "Admin", "admin@gamil.com", "admin");
+    public static final TestUser USER = new TestUser(BaseEntity.START_SEQ, "User", "user@yandex.ru", "password", true, Role.ROLE_USER);
+    public static final User ADMIN = new TestUser(BaseEntity.START_SEQ + 1, "Admin", "admin@gmail.com", "admin", true, Role.ROLE_ADMIN);
 
     public static class TestUser extends User {
 
-        public TestUser(Integer startSeq, String user, String email, String password) {
-            super(startSeq, user,email,password, Role.ROLE_USER);
-        }
         public TestUser(User u) {
-            this(u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.isEnabled(), u.getRegistered(), u.getRoles());
+            this(u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.isEnabled(), u.getRoles());
         }
 
-        public TestUser(Integer id, String name, String email, String password, boolean enabled, Date registered, Set<Role> roles) {
-
+        public TestUser(String name, String email, String password, Role role, Role... roles) {
+            this(null, name, email, password, true, EnumSet.of(role, roles));
         }
 
-//        public TestUser(String name, String email, String password, Role role, Role... roles) {
-//            this(null, name, email, password, true, EnumSet.of(role, roles));
-//        }
+        public TestUser(Integer id, String name, String email, String password, boolean enabled, Role role, Role... roles) {
+            this(id, name, email, password, enabled, EnumSet.of(role, roles));
+        }
 
-
-//        public TestUser(Integer id, String name, String email, String password, boolean enabled, Role role, Role... roles1) {
-//            this(id, name, email, password, enabled, EnumSet.of(role, roles1));
-//        }
-
-//        public TestUser(Integer id, String name, String email, String password, boolean enabled, Set<Role> roles) {
-//            super(id, name, email, password, enabled, roles);
-//        }
-
+        public TestUser(Integer id, String name, String email, String password, boolean enabled, Set<Role> roles) {
+            super(id, name, email, password, enabled, roles);
+        }
 
         public User asUser() {
             return new User(this);
@@ -49,20 +41,38 @@ public class UserTestData {
 
         @Override
         public String toString() {
-            return "TestUser{" +
-                    "email='" + email + '\'' +
-                    ", password='" + password + '\'' +
+            return "User (" +
+                    "id=" + id +
+                    ", email=" + email +
+                    ", name=" + name +
                     ", enabled=" + enabled +
-                    ", registered=" + registered +
-                    ", roles=" + roles +
-                    ", name='" + name + '\'' +
-                    ", id=" + id +
-                    '}';
+                    ", password=" + password +
+                    ", authorities=" + roles +
+                    ')';
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            TestUser that = (TestUser) o;
+
+            return Objects.equals(this.password, that.password)
+                    && Objects.equals(this.id, that.id)
+                    && Objects.equals(this.name, that.name)
+                    && Objects.equals(this.email, that.email)
+                    && Objects.equals(this.enabled, that.enabled);
+//                    && Objects.equals(this.roles, that.roles);
         }
     }
 
-    public static final ModelMatcher<User, TestUser> MATCHER =
-            new ModelMatcher<>(user -> (user instanceof TestUser) ? (TestUser) user : new TestUser(user));
-
+    public static final ModelMatcher<User, TestUser> MATCHER = new ModelMatcher<>(
+            new Function<User, TestUser>() {
+                @Override
+                public TestUser apply(User u) {
+                    return ((u instanceof TestUser) ? (TestUser) u : new TestUser(u));
+                }
+            });
 
 }

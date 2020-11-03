@@ -19,8 +19,7 @@ public class UserAdminSpringMockTest {
 
     @Test
     public void testCreate() throws Exception {
-        Role[] roles = {Role.ROLE_USER};
-        controller.create(new User(null, "Name", "email@gamil.com","newPass", Role.ROLE_USER, roles));
+        controller.create(new User(null, "Name", "email@gamil.com","newPass",true, Role.ROLE_USER));
     }
 
     @Test

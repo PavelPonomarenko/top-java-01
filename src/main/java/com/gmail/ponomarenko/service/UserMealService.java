@@ -2,7 +2,6 @@ package com.gmail.ponomarenko.service;
 
 import com.gmail.ponomarenko.model.UserMeal;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -21,7 +20,7 @@ public interface UserMealService {
 
     UserMeal update(UserMeal meal, int userId);
 
-    UserMeal save(UserMeal meal, int userId);
+    UserMeal save(UserMeal meal);
 
 
 }

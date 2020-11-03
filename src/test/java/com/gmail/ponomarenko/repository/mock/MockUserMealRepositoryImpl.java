@@ -5,7 +5,8 @@ import com.gmail.ponomarenko.model.UserMeal;
 import com.gmail.ponomarenko.repository.UserMealRepository;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,9 +17,19 @@ public class MockUserMealRepositoryImpl implements UserMealRepository {
     public MockUserMealRepositoryImpl() {
     }
 
+    @PostConstruct
+    public void postConstructor() {
+        LOG.info("PostConstructor in MockUserMealRepositoryImpl");
+
+    }
+    @PreDestroy
+    public void preDestroy() {
+        LOG.info("preDestroy in MockUserMealRepositoryImpl");
+
+    }
 
     @Override
-    public UserMeal save(UserMeal userMeal, int userId) {
+    public UserMeal save(UserMeal userMeal) {
         return null;
     }
 
