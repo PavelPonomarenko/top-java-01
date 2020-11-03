@@ -15,12 +15,6 @@ public class MealTestData {
 
     public static final UserMeal USER_MEAL_TEMP_TWO = new UserMeal(BaseEntity.START_SEQ + 3, LocalDateTime.now(), 100001, "salad", 321);
 
-    public static final ModelMatcher<UserMeal, String> MATCHER = new ModelMatcher<>(
-            new Function<UserMeal, String>() {
-                @Override
-                public String apply(UserMeal meal) {
-                    return meal.toString();
-                }
-            });
+    public static final ModelMatcher<UserMeal, String> MATCHER = new ModelMatcher<>(UserMeal::toString);
 
 }

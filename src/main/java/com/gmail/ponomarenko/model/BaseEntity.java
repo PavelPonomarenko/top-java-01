@@ -1,8 +1,9 @@
 package com.gmail.ponomarenko.model;
 
 import com.gmail.ponomarenko.LoggerWrapper;
-
-
+import javax.persistence.MappedSuperclass;
+@MappedSuperclass
+@Access(AccessType.FIELD)
 public class BaseEntity {
 
     protected static final LoggerWrapper LOG = LoggerWrapper.get(BaseEntity.class);

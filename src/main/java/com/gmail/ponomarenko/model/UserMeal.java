@@ -14,6 +14,8 @@ public class UserMeal extends BaseEntity {
     protected int calories;
 
     private int userId;
+    @ManyToOne(fetch=FetchType.LAZY)
+    private User user;
 
     public UserMeal() {
     }

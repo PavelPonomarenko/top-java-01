@@ -1,6 +1,16 @@
 package com.gmail.ponomarenko.model;
 
+
+
+
+
+
+@MappedSuperclass
+@Access(AccessType.FIELD)
 public class NamedEntity extends BaseEntity {
+    @NotEmpty
+    @Column(name="name",nullable="false")
+//    -----------------------------
     protected String name;
 
     public NamedEntity() {
