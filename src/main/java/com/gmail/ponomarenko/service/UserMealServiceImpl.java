@@ -7,23 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
 public class UserMealServiceImpl implements UserMealService {
+
     @Autowired
     private UserMealRepository repository;
 
-
     @Override
-    public UserMeal save(UserMeal meal) {
-        return repository.save(meal);
-    }
-
-    @Override
-    public UserMeal update(UserMeal meal, int userId) {
-        return ExceptionUtil.check(repository.save(meal), meal.getId());
+    public UserMeal get(int id, int userId) {
+        return ExceptionUtil.check(repository.get(id, userId), id);
     }
 
     @Override
@@ -32,13 +26,8 @@ public class UserMealServiceImpl implements UserMealService {
     }
 
     @Override
-    public void deleteAll(int userId) {
-        repository.deleteAll(userId);
-    }
-
-    @Override
-    public UserMeal get(int id, int userId) {
-        return ExceptionUtil.check(repository.get(id, userId), id);
+    public List<UserMeal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
+        return repository.getBetween(startDate, endDate, userId);
     }
 
     @Override
@@ -47,47 +36,17 @@ public class UserMealServiceImpl implements UserMealService {
     }
 
     @Override
-    public List<UserMeal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
-        return repository.getBetween(startDate, endDate.plus(1, ChronoUnit.DAYS), userId);
+    public void deleteAll(int userId) {
+        repository.deleteAll(userId);
     }
-//
-//    @Autowired
-//    private UserMealRepository repository;
-//
-//
-//    @Override
-//    public UserMeal save(UserMeal meal, int userId) {
-//        return repository.save(meal, userId);
-//    }
-//
-//    @Override
-//    public UserMeal update(UserMeal meal, int userId) {
-//        return ExceptionUtil.check(repository.save(meal, userId), meal.getId());
-//    }
-//
-//    @Override
-//    public void delete(int id, int userId) {
-//        ExceptionUtil.check(repository.delete(id, userId), id);
-//    }
-//
-//    @Override
-//    public void deleteAll(int userId) {
-//        repository.deleteAll(userId);
-//    }
-//
-//    @Override
-//    public UserMeal get(int id, int userId) {
-//        return ExceptionUtil.check(repository.get(id, userId), id);
-//    }
-//
-//    @Override
-//    public List<UserMeal> getAll(int userId) {
-//        return repository.getAll(userId);
-//    }
-//
-//    @Override
-//    public List<UserMeal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
-//        return repository.getBetween(startDate, endDate.plus(1, ChronoUnit.DAYS), userId);
-//    }
 
+    @Override
+    public UserMeal update(UserMeal meal, int userId) {
+        return ExceptionUtil.check(repository.save(meal, userId), meal.getId());
+    }
+
+    @Override
+    public UserMeal save(UserMeal meal, int userId) {
+        return repository.save(meal, userId);
+    }
 }

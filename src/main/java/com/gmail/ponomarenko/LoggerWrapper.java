@@ -45,7 +45,7 @@ public class LoggerWrapper {
     }
 
     public IllegalStateException getIllegalStateException(String msg) {
-        return getIllegalStateException(msg);
+        return getIllegalStateException(msg, null);
     }
 
     public IllegalStateException getIllegalStateException(String msg, Throwable e) {
@@ -53,12 +53,22 @@ public class LoggerWrapper {
         return new IllegalStateException(msg, e);
     }
 
+    public IllegalArgumentException getIllegalArgumentException(String msg) {
+        return getIllegalArgumentException(msg, null);
+    }
+
+    public IllegalArgumentException getIllegalArgumentException(String msg, Throwable e) {
+        logger.error(msg, e);
+        return new IllegalArgumentException(msg, e);
+    }
+
     public UnsupportedOperationException getUnsupportedOperationException(String msg) {
         logger.error(msg);
         return new UnsupportedOperationException(msg);
     }
+
     public NotFoundException getNotFoundException(String reason) {
-        logger.error("Not data found ");
+        logger.error("No data found");
         return new NotFoundException(reason);
     }
 }

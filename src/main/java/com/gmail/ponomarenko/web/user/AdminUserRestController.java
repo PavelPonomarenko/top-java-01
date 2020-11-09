@@ -17,8 +17,6 @@ public class AdminUserRestController {
     @Autowired
     private UserService service;
 
-    public AdminUserRestController() {
-    }
 
 
     public List<User> getAll(int id) {

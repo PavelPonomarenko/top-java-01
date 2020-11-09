@@ -12,7 +12,6 @@ import java.util.Set;
 import java.util.function.Function;
 
 public class UserTestData {
-    private static final LoggerWrapper LOG = LoggerWrapper.get(UserTestData.class);
 
     public static final TestUser USER = new TestUser(BaseEntity.START_SEQ, "User", "user@yandex.ru", "password", true, Role.ROLE_USER);
     public static final User ADMIN = new TestUser(BaseEntity.START_SEQ + 1, "Admin", "admin@gmail.com", "admin", true, Role.ROLE_ADMIN);
@@ -68,11 +67,6 @@ public class UserTestData {
     }
 
     public static final ModelMatcher<User, TestUser> MATCHER = new ModelMatcher<>(
-            new Function<User, TestUser>() {
-                @Override
-                public TestUser apply(User u) {
-                    return ((u instanceof TestUser) ? (TestUser) u : new TestUser(u));
-                }
-            });
+            u -> ((u instanceof TestUser) ? (TestUser) u : new TestUser(u)));
 
 }

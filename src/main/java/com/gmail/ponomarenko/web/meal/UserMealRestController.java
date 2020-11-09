@@ -2,8 +2,8 @@ package com.gmail.ponomarenko.web.meal;
 
 import com.gmail.ponomarenko.LoggedUser;
 import com.gmail.ponomarenko.LoggerWrapper;
-import com.gmail.ponomarenko.model.UserMeal;
 
+import com.gmail.ponomarenko.model.UserMeal;
 import com.gmail.ponomarenko.service.UserMealService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,7 +55,7 @@ public class UserMealRestController {
     private UserMeal create(UserMeal meal) {
         int userId = LoggedUser.id();
         LOG.info("create  {} for user {}", meal, userId);
-        return service.save(meal);
+        return service.save(meal, userId);
     }
 
     public List<UserMeal> getBetween(LocalDateTime startDate, LocalDateTime andDate) {

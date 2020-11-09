@@ -1,16 +1,17 @@
 package com.gmail.ponomarenko.model;
 
 
+import org.hibernate.validator.constraints.NotEmpty;
 
-
-
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-@Access(AccessType.FIELD)
+//@Access(AccessType.FIELD)
 public class NamedEntity extends BaseEntity {
+
     @NotEmpty
-    @Column(name="name",nullable="false")
-//    -----------------------------
+    @Column(name = "name", nullable = false)
     protected String name;
 
     public NamedEntity() {

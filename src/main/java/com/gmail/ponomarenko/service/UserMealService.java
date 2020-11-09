@@ -6,8 +6,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface UserMealService {
-
-
     UserMeal get(int id, int userId);
 
     void delete(int id, int userId);
@@ -20,7 +18,7 @@ public interface UserMealService {
 
     UserMeal update(UserMeal meal, int userId);
 
-    UserMeal save(UserMeal meal);
+    UserMeal save(UserMeal meal, int userId);
 
 
 }

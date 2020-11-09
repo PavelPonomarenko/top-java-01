@@ -7,7 +7,8 @@ import java.util.List;
 
 public interface UserMealRepository {
 
-    UserMeal save(UserMeal userMeal);
+
+    UserMeal save(UserMeal userMeal, int userId);
 
     boolean delete(int id, int userId);
 
@@ -18,5 +19,6 @@ public interface UserMealRepository {
     void deleteAll(int userId);
 
     List<UserMeal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId);
+
 
 }

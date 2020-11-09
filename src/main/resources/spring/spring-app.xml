@@ -6,50 +6,13 @@
                             http://www.springframework.org/schema/context
                             http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <import resource="spring-tools.xml"/>
 
     <context:annotation-config/>
-    <context:component-scan base-package="com.gmail.**.repository.jdbc"/>
-    <context:component-scan base-package="com.gmail.**.service"/>
-    <context:component-scan base-package="com.gmail.**.web"/>
+    <context:component-scan base-package="com.gmail.ponomarenko.service"/>
+    <!--    <context:component-scan base-package="com.gmail.ponomarenko.web"/>-->
 </beans>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <!-- variant 1-->
-
-        <!--    <bean class="com.gmail.ponomarenko.repository.mock.MockUserRepositoryImpl" id="mockUserRepository"/>-->
-        <!--    <bean class="java.com.gmail.ponomarenko.repository.mock.service.UserServiceImpl">-->
-        <!--                <property name="mockUserRepository" ref="mockUserRepository"/>-->
-        <!--    </bean>-->
-
-        <!--    <bean class="com.gmail.ponomarenko.repository.mock.MockUserMealRepositoryImpl" id="mockMealRepository"/>-->
-        <!--    <bean class="java.com.gmail.ponomarenko.repository.mock.service.UserMealServiceImpl">-->
-        <!--                <property name="mockMealRepository" ref="mockMealRepository"/>-->
-        <!--    </bean>-->
-
-
-        <!--    version 2   Annotations-->
 
 
 
