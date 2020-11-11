@@ -1,5 +1,6 @@
 package com.gmail.ponomarenko.service;
 
+import com.gmail.ponomarenko.LoggerWrapper;
 import com.gmail.ponomarenko.model.BaseEntity;
 import com.gmail.ponomarenko.model.Role;
 import com.gmail.ponomarenko.model.User;
@@ -30,6 +31,7 @@ import static com.gmail.ponomarenko.UserTestData.*;
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class UserServiceTest {
+    private static final LoggerWrapper LOG = LoggerWrapper.get(UserServiceTest.class);
 
     @Autowired
     protected UserService service;
@@ -39,13 +41,16 @@ public class UserServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        System.out.println("----> Test started <----");
+        LOG.info("---------------- Start test before dbPopulator -------------------");
         dbPopulator.execute();
+        LOG.info("------------------- Start test after dbPopulator ----------------------");
+
     }
 
     @After
     public void after() {
-        System.out.println("----> Test finished <----");
+        LOG.info("------------------- Finish test UserServiceTest.class ----------------------");
+
     }
 
     @Test

@@ -1,20 +1,21 @@
 package com.gmail.ponomarenko.service;
 
+import com.gmail.ponomarenko.LoggerWrapper;
 import com.gmail.ponomarenko.model.UserMeal;
+import com.gmail.ponomarenko.repository.mock.MockUserRepositoryImpl;
 import com.gmail.ponomarenko.util.DbPopulator;
 import com.gmail.ponomarenko.util.exception.NotFoundException;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 
 import static com.gmail.ponomarenko.MealTestData.*;
 import static com.gmail.ponomarenko.model.BaseEntity.START_SEQ;
@@ -23,10 +24,10 @@ import static com.gmail.ponomarenko.model.BaseEntity.START_SEQ;
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",
         "classpath:spring/spring-db.xml",
-        "classpath:spring/mock.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class UserMealServiceTest {
+    private static final LoggerWrapper LOG = LoggerWrapper.get(UserMealServiceTest.class);
 
     @Autowired
     UserMealService service;
@@ -36,15 +37,29 @@ public class UserMealServiceTest {
 
     @Before
     public void setUp() throws Exception {
+        LOG.info("------------------- Start test before dbPopulator -------------------");
         dbPopulator.execute();
+        LOG.info("------------------- Start test after dbPopulator ----------------------");
     }
 
-    @Rule  public ExpectedException thrown = ExpectedException.none();
+    @After
+    public void after() {
+        LOG.info("------------------- Finish UserMealServiceTest.class ----------------------");
+    }
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void testDelete() throws Exception {
+        LOG.info("------------------- Start testDelete  -------------------");
+
         service.delete(MEAL1_ID, START_SEQ);
+        LOG.info("------------------- testDelete after service.delete -------------------");
+
         MATCHER.assertListEquals(Arrays.asList(MEAL4, MEAL3, MEAL2), service.getAll(START_SEQ));
+        LOG.info("------------------- testDelete after MATCHER.assertListEquals -------------------");
+
     }
 
     //@Test(expected = NotFoundException.class)
@@ -81,11 +96,11 @@ public class UserMealServiceTest {
         MATCHER.assertEquals(updated, service.get(MEAL1_ID, START_SEQ));
     }
 
-    //@Test(expected = NotFoundException.class)
+//        @Test(expected = NotFoundException.class)
     @Test
     public void testNotFoundUpdate() throws Exception {
         UserMeal item = service.get(MEAL1_ID, START_SEQ);
-        thrown.expect(NotFoundException.class);
+//        thrown.expect(NotFoundException.class);
         service.update(item, START_SEQ + 1);
     }
 
@@ -103,6 +118,8 @@ public class UserMealServiceTest {
     @Test
     public void testDeleteAll() throws Exception {
         service.deleteAll(START_SEQ);
+        List<UserMeal> userMeals = service.getAll(START_SEQ);
         Assert.assertEquals(0, service.getAll(START_SEQ).size());
+
     }
 }

@@ -5,6 +5,7 @@ import com.gmail.ponomarenko.model.Role;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -30,7 +31,7 @@ public class User extends NamedEntity {
 
     @Column(name = "password", nullable = false)
     @NotEmpty
-    @Length(min = 5)
+    @Length(min = 2)
     protected String password;
 
     @Column(name = "enabled", nullable = false)

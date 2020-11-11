@@ -18,9 +18,6 @@ public class UserMealRestController {
     @Autowired
     private UserMealService service;
 
-    /*
-     * methods
-     */
     public UserMeal create(UserMeal meal) {
         int userId = LoggedUser.id();
         LOG.info("create {} for User {}", userId);
