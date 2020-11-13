@@ -5,6 +5,7 @@ import com.gmail.ponomarenko.model.UserMeal;
 import com.gmail.ponomarenko.repository.UserMealRepository;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;

@@ -5,7 +5,6 @@ import com.gmail.ponomarenko.model.BaseEntity;
 import com.gmail.ponomarenko.model.Role;
 import com.gmail.ponomarenko.model.User;
 
-import java.util.Date;
 import java.util.EnumSet;
 import java.util.Objects;
 import java.util.Set;
@@ -68,11 +67,5 @@ public class UserTestData {
     }
 
     public static final ModelMatcher<User, TestUser> MATCHER = new ModelMatcher<>(
-            new Function<User, TestUser>() {
-                @Override
-                public TestUser apply(User u) {
-                    return ((u instanceof TestUser) ? (TestUser) u : new TestUser(u));
-                }
-            });
-
+            u -> ((u instanceof TestUser) ? (TestUser) u : new TestUser(u)));
 }

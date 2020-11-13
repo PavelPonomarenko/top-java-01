@@ -4,9 +4,7 @@ import com.gmail.ponomarenko.LoggedUser;
 import com.gmail.ponomarenko.LoggerWrapper;
 import com.gmail.ponomarenko.model.User;
 import com.gmail.ponomarenko.service.UserService;
-import com.gmail.ponomarenko.web.meal.UserMealRestController;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 
 @Controller

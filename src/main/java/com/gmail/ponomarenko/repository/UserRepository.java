@@ -1,7 +1,6 @@
 package com.gmail.ponomarenko.repository;
 
 import com.gmail.ponomarenko.model.User;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 

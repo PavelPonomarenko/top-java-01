@@ -1,11 +1,9 @@
 package com.gmail.ponomarenko.model;
 
-import com.gmail.ponomarenko.model.NamedEntity;
-import com.gmail.ponomarenko.model.Role;
+
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.*;
 import java.util.Date;

@@ -3,7 +3,6 @@ package com.gmail.ponomarenko.repository.mock;
 import com.gmail.ponomarenko.LoggerWrapper;
 import com.gmail.ponomarenko.model.User;
 import com.gmail.ponomarenko.repository.UserRepository;
-import com.gmail.ponomarenko.util.exception.ExceptionUtil;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;

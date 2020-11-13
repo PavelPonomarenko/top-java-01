@@ -1,15 +1,15 @@
 package com.gmail.ponomarenko.service;
 
 import com.gmail.ponomarenko.LoggerWrapper;
+import com.gmail.ponomarenko.MealTestData;
+import com.gmail.ponomarenko.model.BaseEntity;
 import com.gmail.ponomarenko.model.UserMeal;
-import com.gmail.ponomarenko.repository.mock.MockUserRepositoryImpl;
 import com.gmail.ponomarenko.util.DbPopulator;
 import com.gmail.ponomarenko.util.exception.NotFoundException;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -39,16 +39,17 @@ public class UserMealServiceTest {
     public void setUp() throws Exception {
         LOG.info("------------------- Start test before dbPopulator -------------------");
         dbPopulator.execute();
-        LOG.info("------------------- Start test after dbPopulator ----------------------");
+        LOG.info("------------------- Start test after dbPopulator --------------------");
     }
 
     @After
     public void after() {
-        LOG.info("------------------- Finish UserMealServiceTest.class ----------------------");
+        LOG.info("------------------- Finish UserMealServiceTest.class ----------------");
     }
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
 
     @Test
     public void testDelete() throws Exception {
@@ -62,7 +63,6 @@ public class UserMealServiceTest {
 
     }
 
-    //@Test(expected = NotFoundException.class)
     @Test
     public void testDeleteNotFound() throws Exception {
         thrown.expect(NotFoundException.class);
@@ -82,7 +82,6 @@ public class UserMealServiceTest {
         MATCHER.assertEquals(MEAL1, actual);
     }
 
-    //@Test(expected = NotFoundException.class)
     @Test
     public void testGetNotFound() throws Exception {
         thrown.expect(NotFoundException.class);
@@ -96,11 +95,9 @@ public class UserMealServiceTest {
         MATCHER.assertEquals(updated, service.get(MEAL1_ID, START_SEQ));
     }
 
-//        @Test(expected = NotFoundException.class)
     @Test
     public void testNotFoundUpdate() throws Exception {
         UserMeal item = service.get(MEAL1_ID, START_SEQ);
-//        thrown.expect(NotFoundException.class);
         service.update(item, START_SEQ + 1);
     }
 
@@ -120,6 +117,28 @@ public class UserMealServiceTest {
         service.deleteAll(START_SEQ);
         List<UserMeal> userMeals = service.getAll(START_SEQ);
         Assert.assertEquals(0, service.getAll(START_SEQ).size());
+
+    }
+
+    @Test(expected = AssertionError.class)
+    public void tryingSaveDuplicateMeal() {
+
+        int startNum = service.getAll(START_SEQ).size();
+        service.save(MEAL1, START_SEQ);
+        service.save(MEAL2, START_SEQ);
+        service.save(MEAL3, START_SEQ);
+        Assert.assertNotEquals("------- the size of the database is expected to be different ------"
+                , startNum, service.getAll(START_SEQ).size());
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void updateNonExistentEntity() {
+        service.deleteAll(START_SEQ);
+        System.out.println(service.getAll(START_SEQ).size());
+
+        UserMeal updated = getUpdated();
+        service.update(updated, START_SEQ);
+        MATCHER.assertEquals(updated, service.get(MEAL1_ID, START_SEQ));
 
     }
 }

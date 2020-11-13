@@ -5,8 +5,6 @@ import com.gmail.ponomarenko.model.UserMeal;
 import com.gmail.ponomarenko.repository.UserMealRepository;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -36,12 +34,10 @@ public class MockUserMealRepositoryImpl implements UserMealRepository {
 
     @Override
     public void deleteAll(int userId) {
-
     }
 
     @Override
     public List<UserMeal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
         return null;
     }
-
 }

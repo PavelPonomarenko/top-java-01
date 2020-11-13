@@ -4,9 +4,6 @@ import com.gmail.ponomarenko.LoggerWrapper;
 import com.gmail.ponomarenko.model.BaseEntity;
 import com.gmail.ponomarenko.model.Role;
 import com.gmail.ponomarenko.model.User;
-import com.gmail.ponomarenko.UserTestData;
-import com.gmail.ponomarenko.repository.mock.MockUserMealRepositoryImpl;
-import com.gmail.ponomarenko.repository.mock.MockUserRepositoryImpl;
 import com.gmail.ponomarenko.util.DbPopulator;
 import com.gmail.ponomarenko.util.exception.NotFoundException;
 import org.junit.After;
@@ -27,7 +24,6 @@ import static com.gmail.ponomarenko.UserTestData.*;
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",
         "classpath:spring/spring-db.xml",
-//        "classpath:spring/mock.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class UserServiceTest {
@@ -62,7 +58,7 @@ public class UserServiceTest {
     }
 
     @Test(expected = DataAccessException.class)
-    public void testDuplicateMailSave() throws Exception {
+    public void testDuplicateEMailSave() throws Exception {
         service.save(new TestUser("Duplicate", "user@yandex.ru", "newPass", Role.ROLE_USER).asUser());
     }
 

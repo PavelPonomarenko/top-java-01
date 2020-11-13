@@ -1,7 +1,6 @@
 package com.gmail.ponomarenko.model;
 
 import com.gmail.ponomarenko.LoggerWrapper;
-
 import javax.persistence.*;
 
 @MappedSuperclass
@@ -35,7 +34,6 @@ public class BaseEntity {
         return (this.id == null);
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -51,5 +49,4 @@ public class BaseEntity {
     public int hashCode() {
         return (id == null) ? 0 : id;
     }
-
 }

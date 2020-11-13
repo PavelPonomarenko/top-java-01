@@ -2,11 +2,9 @@ package com.gmail.ponomarenko;
 
 import com.gmail.ponomarenko.matcher.ModelMatcher;
 import com.gmail.ponomarenko.model.BaseEntity;
-import com.gmail.ponomarenko.model.User;
 import com.gmail.ponomarenko.model.UserMeal;
 
 import java.time.LocalDateTime;
-import java.util.function.Function;
 
 import static java.time.LocalDateTime.of;
 
@@ -17,6 +15,7 @@ public class MealTestData {
     public static final UserMeal MEAL2 = new UserMeal(MEAL1_ID + 1, LocalDateTime.of(2015, 1, 6, 13, 0), "dinner", 1000);
     public static final UserMeal MEAL3 = new UserMeal(MEAL1_ID + 2, LocalDateTime.of(2015, 1, 7, 0, 0), "supper", 600);
     public static final UserMeal MEAL4 = new UserMeal(MEAL1_ID + 3, LocalDateTime.of(2015, 1, 7, 13, 0), "dinner", 1300);
+    public static final UserMeal MEAL5 = new UserMeal(MEAL1_ID + 5, LocalDateTime.of(2015, 1, 7, 13, 0), "dinner", 1300);
     public static final UserMeal ADMIN_MEAL = new UserMeal(MEAL1_ID + 4, LocalDateTime.of(2015, 1, 6, 14, 0), "admin_meal", 2000);
 
     public static UserMeal getCreated() {
@@ -28,6 +27,11 @@ public class MealTestData {
         updated.setDescription("Updated breakfast");
         return updated;
     }
+
+//    public static UserMeal createUserMeal(UserMeal userMeal) {
+//
+//        return userMeal;
+//    }
 
     public static final ModelMatcher<UserMeal, String> MATCHER = new ModelMatcher<>(UserMeal::toString);
 

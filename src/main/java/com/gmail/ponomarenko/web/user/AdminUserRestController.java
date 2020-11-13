@@ -1,11 +1,9 @@
 package com.gmail.ponomarenko.web.user;
 
-import com.gmail.ponomarenko.LoggedUser;
 import com.gmail.ponomarenko.LoggerWrapper;
 import com.gmail.ponomarenko.model.User;
 import com.gmail.ponomarenko.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
@@ -19,7 +17,6 @@ public class AdminUserRestController {
 
     public AdminUserRestController() {
     }
-
 
     public List<User> getAll(int id) {
         LOG.info("getAll");

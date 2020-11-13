@@ -20,5 +20,4 @@ public class DbPopulator extends ResourceDatabasePopulator {
     public void execute() {
         DatabasePopulatorUtils.execute(this, dataSource);
     }
-
 }

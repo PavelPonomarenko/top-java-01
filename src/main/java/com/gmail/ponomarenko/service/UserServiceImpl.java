@@ -5,7 +5,6 @@ import com.gmail.ponomarenko.repository.UserRepository;
 import com.gmail.ponomarenko.util.exception.ExceptionUtil;
 import com.gmail.ponomarenko.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +14,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     public UserRepository repository;
-
 
     public UserServiceImpl() {
     }
