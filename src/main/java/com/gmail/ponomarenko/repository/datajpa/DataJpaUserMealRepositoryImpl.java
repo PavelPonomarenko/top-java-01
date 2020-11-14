@@ -6,6 +6,7 @@ import com.gmail.ponomarenko.repository.UserMealRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,51 +14,35 @@ import java.util.List;
 
 @Repository
 public class DataJpaUserMealRepositoryImpl implements UserMealRepository {
-    private static final Sort SORT_BY_DATETIME = new Sort(Sort.Direction.DESC,"dateTime");
+    @Autowired
+    private ProxyUserMealRepository proxy;
 
     @Autowired
-    ProxyUserMealRepository proxy;
-
-    @Autowired
-    ProxyUserRepository proxyUser;
+    private ProxyUserRepository userProxy;
 
     @Override
+    @Transactional
     public UserMeal save(UserMeal userMeal, int userId) {
-        User user = proxyUser.findOne(userId);
-        userMeal.setUser(user);
-        if (userMeal.isNew()) {
-        } else {
-            if (get(userMeal.getId(), userId) == null) return null;
+        userMeal.setUser(userProxy.getOne(userId));
+        if (!userMeal.isNew() && get(userMeal.getId(), userId) == null) {
+            return null;
         }
-
         return proxy.save(userMeal);
-
     }
 
     @Override
     public boolean delete(int id, int userId) {
-        return proxy.delete(id,userId) != 0;
+        return proxy.delete(id, userId) != 0;
     }
 
     @Override
     public UserMeal get(int id, int userId) {
-        //var1
-        return proxy.getByIdAndUser(id,userId);
-        //var2
-//        User user = proxyUser.findOne(userId);
-//        return proxy.getByIdAndUser(id,user);
+        return proxy.get(id, userId);
     }
 
     @Override
     public List<UserMeal> getAll(int userId) {
-        //var1
-//        return proxy.getAll(userId);
-        //var2
-//        User user = proxyUser.findOne(userId);
-//        return proxy.findAllByUserOrderByDateTimeDesc(user);
-        //var3
-        User user = proxyUser.findOne(userId);
-        return proxy.findAllByUser(user,SORT_BY_DATETIME);
+        return proxy.getAll(userId);
     }
 
     @Override
