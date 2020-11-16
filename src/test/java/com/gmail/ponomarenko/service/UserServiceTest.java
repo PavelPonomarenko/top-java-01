@@ -22,16 +22,8 @@ import java.util.List;
 
 import static com.gmail.ponomarenko.UserTestData.*;
 
-@ContextConfiguration({
-        "classpath:spring/spring-app.xml",
-        "classpath:spring/spring-db.xml",
-})
 
-//@ActiveProfiles("hsqldb")
-@ActiveProfiles("postgres")
-@RunWith(SpringJUnit4ClassRunner.class)
-public class UserServiceTest {
-    private static final LoggerWrapper LOG = LoggerWrapper.get(UserServiceTest.class);
+abstract public class UserServiceTest extends DbTest {
 
     @Autowired
     protected UserService service;
@@ -41,19 +33,9 @@ public class UserServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        LOG.info("---------------- Start test before dbPopulator -------------------");
         dbPopulator.execute();
         service.evictCache();
-        LOG.info("------------------- Start test after dbPopulator ----------------------");
-
     }
-
-    @After
-    public void after() {
-        LOG.info("------------------- Finish test UserServiceTest.class ----------------------");
-
-    }
-
     @Test
     public void testSave() throws Exception {
         TestUser tu = new TestUser("New", "new@gmail.com", "newPass", Role.ROLE_USER);

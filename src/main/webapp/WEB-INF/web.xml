@@ -5,22 +5,51 @@
                              http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-    <servlet>
-        <servlet-name>UserServlet</servlet-name>
-        <servlet-class>com.gmail.ponomarenko.controllers.UserServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>UserServlet</servlet-name>
-        <url-pattern>/user</url-pattern>
-    </servlet-mapping>
+    <display-name>Topjava-01</display-name>
 
+    <context-param>
+        <param-name>spring.profiles.default</param-name>
+        <param-value>postgres,datajpa</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath:spring/spring-app.xml
+            classpath:spring/spring-db.xml
+        </param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+
+
+           <servlet>
+               <servlet-name>userServlet</servlet-name>
+               <servlet-class>com.gmail.ponomarenko.web.UserServlet</servlet-class>
+               <load-on-startup>0</load-on-startup>
+           </servlet>
+           <servlet-mapping>
+               <servlet-name>userServlet</servlet-name>
+               <url-pattern>/usersServlet</url-pattern>
+           </servlet-mapping>
+
+
+    <!--Spring MVC-->
     <servlet>
-        <servlet-name>UserMealServlet</servlet-name>
-        <servlet-class>com.gmail.ponomarenko.controllers.UserMealServlet</servlet-class>
+        <servlet-name>mvc-dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring/spring-mvc.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>UserMealServlet</servlet-name>
-        <url-pattern>/user/meal</url-pattern>
+        <servlet-name>mvc-dispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
 

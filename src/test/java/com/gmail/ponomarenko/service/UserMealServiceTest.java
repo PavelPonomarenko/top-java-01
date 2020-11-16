@@ -21,48 +21,18 @@ import java.util.List;
 import static com.gmail.ponomarenko.MealTestData.*;
 import static com.gmail.ponomarenko.model.BaseEntity.START_SEQ;
 
-@ContextConfiguration({
-        "classpath:spring/spring-app.xml",
-        "classpath:spring/spring-db.xml",
-})
-//@ActiveProfiles("hsqldb")
-@ActiveProfiles("postgres")
-@RunWith(SpringJUnit4ClassRunner.class)
-public class UserMealServiceTest {
-    private static final LoggerWrapper LOG = LoggerWrapper.get(UserMealServiceTest.class);
+
+public class UserMealServiceTest extends DbTest {
 
     @Autowired
     UserMealService service;
-
-    @Autowired
-    private DbPopulator dbPopulator;
-
-    @Before
-    public void setUp() throws Exception {
-        LOG.info("------------------- Start test before dbPopulator -------------------");
-        dbPopulator.execute();
-        LOG.info("------------------- Start test after dbPopulator --------------------");
-    }
-
-    @After
-    public void after() {
-        LOG.info("------------------- Finish UserMealServiceTest.class ----------------");
-    }
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-
     @Test
     public void testDelete() throws Exception {
-        LOG.info("------------------- Start testDelete  -------------------");
-
         service.delete(MEAL1_ID, START_SEQ);
-        LOG.info("------------------- testDelete after service.delete -------------------");
-
         MATCHER.assertListEquals(Arrays.asList(MEAL4, MEAL3, MEAL2), service.getAll(START_SEQ));
-        LOG.info("------------------- testDelete after MATCHER.assertListEquals -------------------");
-
     }
 
     @Test
