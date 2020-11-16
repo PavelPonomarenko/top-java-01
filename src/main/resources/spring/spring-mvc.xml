@@ -27,15 +27,15 @@
     <!--  all resources inside folder src/main/webapp/resources are mapped so they can be refered to inside JSP files -->
 
 
-<!--    spring bundle for localization-->
-        <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"
-              p:cacheSeconds="60"
-              p:defaultEncoding="UTF-8">
+    <!--    spring bundle for localization-->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
+          p:cacheSeconds="60"
+          p:defaultEncoding="UTF-8">
 
-            <property name="basenames">
-                <list>
-                    <value>messages.app</value>
-                </list>
-            </property>
-        </bean>
+        <property name="basenames">
+            <list>
+                <value>messages.app</value>
+            </list>
+        </property>
+    </bean>
 </beans>

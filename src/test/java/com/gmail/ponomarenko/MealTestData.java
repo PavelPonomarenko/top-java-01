@@ -28,12 +28,5 @@ public class MealTestData {
         return updated;
     }
 
-//    public static UserMeal createUserMeal(UserMeal userMeal) {
-//
-//        return userMeal;
-//    }
-
     public static final ModelMatcher<UserMeal, String> MATCHER = new ModelMatcher<>(UserMeal::toString);
-
-
 }

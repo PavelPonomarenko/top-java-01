@@ -1,13 +1,10 @@
 package com.gmail.ponomarenko.service;
 
-import com.gmail.ponomarenko.LoggerWrapper;
 import com.gmail.ponomarenko.model.BaseEntity;
 import com.gmail.ponomarenko.model.Role;
 import com.gmail.ponomarenko.model.User;
 import com.gmail.ponomarenko.util.DbPopulator;
 import com.gmail.ponomarenko.util.exception.NotFoundException;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,17 +22,6 @@ import static com.gmail.ponomarenko.UserTestData.*;
 
 abstract public class UserServiceTest extends DbTest {
 
-    @Autowired
-    protected UserService service;
-
-    @Autowired
-    private DbPopulator dbPopulator;
-
-    @Before
-    public void setUp() throws Exception {
-        dbPopulator.execute();
-        service.evictCache();
-    }
     @Test
     public void testSave() throws Exception {
         TestUser tu = new TestUser("New", "new@gmail.com", "newPass", Role.ROLE_USER);
@@ -78,7 +64,6 @@ abstract public class UserServiceTest extends DbTest {
         List<User> all = service.getAll();
         MATCHER.assertListEquals(Arrays.asList(ADMIN, USER), all);
     }
-
     @Test
     public void testUpdate() throws Exception {
         TestUser updated = new TestUser(USER);
@@ -86,5 +71,4 @@ abstract public class UserServiceTest extends DbTest {
         service.update(updated.asUser());
         MATCHER.assertEquals(updated, service.get(BaseEntity.START_SEQ));
     }
-
 }

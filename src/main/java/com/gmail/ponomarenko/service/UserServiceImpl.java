@@ -2,7 +2,6 @@ package com.gmail.ponomarenko.service;
 
 import com.gmail.ponomarenko.model.User;
 import com.gmail.ponomarenko.repository.UserRepository;
-import com.gmail.ponomarenko.repository.datajpa.ProxyUserRepository;
 import com.gmail.ponomarenko.util.exception.ExceptionUtil;
 import com.gmail.ponomarenko.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

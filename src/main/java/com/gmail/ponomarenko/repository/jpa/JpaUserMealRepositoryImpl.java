@@ -20,7 +20,6 @@ public class JpaUserMealRepositoryImpl implements UserMealRepository {
     @PersistenceContext
     private EntityManager em;
 
-
     @Override
     @Transactional
     public UserMeal save(UserMeal meal, int userId) {
@@ -61,7 +60,6 @@ public class JpaUserMealRepositoryImpl implements UserMealRepository {
                 .setParameter("userId", userId)
                 .executeUpdate();
     }
-
 
     @Override
     public List<UserMeal> getAll(int userId) {

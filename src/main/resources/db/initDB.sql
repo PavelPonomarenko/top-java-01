@@ -36,9 +36,9 @@ CREATE TABLE USERS
 (
     id         INTEGER PRIMARY KEY DEFAULT nextval('GLOBAL_SEQ'),
     name       VARCHAR,
-    email      VARCHAR NOT NULL,
-    password   VARCHAR NOT NULL,
-    registered TIMESTAMP           DEFAULT now(),
+    email      VARCHAR   NOT NULL,
+    password   VARCHAR   NOT NULL,
+    registered TIMESTAMP NOT NULL  DEFAULT now(),
     enabled    BOOL                DEFAULT TRUE
 );
 CREATE UNIQUE INDEX unique_email ON USERS (email);

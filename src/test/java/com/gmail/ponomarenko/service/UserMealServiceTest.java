@@ -22,7 +22,7 @@ import static com.gmail.ponomarenko.MealTestData.*;
 import static com.gmail.ponomarenko.model.BaseEntity.START_SEQ;
 
 
-public class UserMealServiceTest extends DbTest {
+ public class UserMealServiceTest {
 
     @Autowired
     UserMealService service;

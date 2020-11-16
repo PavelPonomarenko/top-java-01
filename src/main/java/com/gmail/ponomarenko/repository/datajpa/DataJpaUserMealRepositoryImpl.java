@@ -1,10 +1,8 @@
 package com.gmail.ponomarenko.repository.datajpa;
 
-import com.gmail.ponomarenko.model.User;
 import com.gmail.ponomarenko.model.UserMeal;
 import com.gmail.ponomarenko.repository.UserMealRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
