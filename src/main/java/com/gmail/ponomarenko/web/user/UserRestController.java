@@ -5,9 +5,9 @@ import com.gmail.ponomarenko.LoggerWrapper;
 import com.gmail.ponomarenko.model.User;
 import com.gmail.ponomarenko.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class UserRestController {
     private static final LoggerWrapper LOG = LoggerWrapper.get(UserRestController.class);
 

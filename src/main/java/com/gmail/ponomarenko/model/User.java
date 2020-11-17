@@ -25,6 +25,8 @@ public class User extends NamedEntity {
     public static final String ALL_SORTED = "User.getAllSorted";
     public static final String BY_EMAIL = "User.getByEmail";
 
+
+
     @Column(name = "email", nullable = false, unique = true)
     @Email
     @NotEmpty
