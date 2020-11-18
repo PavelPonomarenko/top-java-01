@@ -10,6 +10,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
@@ -20,6 +22,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static com.gmail.ponomarenko.UserTestData.*;
+import static org.mockito.Mockito.*;
 
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",
@@ -37,16 +40,13 @@ public class UserServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        LOG.info("---------------- Start test before dbPopulator -------------------");
+        LOG.info("| ----- Test UserServiceTest.class is started ----- |");
         dbPopulator.execute();
-        LOG.info("------------------- Start test after dbPopulator ----------------------");
-
     }
 
     @After
     public void after() {
-        LOG.info("------------------- Finish test UserServiceTest.class ----------------------");
-
+        LOG.info("| ----- Test UserServiceTest.class is finished ----- |");
     }
 
     @Test
