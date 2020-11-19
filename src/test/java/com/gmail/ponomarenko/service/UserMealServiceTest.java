@@ -10,6 +10,7 @@ import org.junit.*;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -26,6 +27,8 @@ import static com.gmail.ponomarenko.model.BaseEntity.START_SEQ;
         "classpath:spring/spring-db.xml",
 })
 @RunWith(SpringJUnit4ClassRunner.class)
+@ActiveProfiles("postgres")
+//@ActiveProfiles("hsqldb")
 public class UserMealServiceTest {
     private static final LoggerWrapper LOG = LoggerWrapper.get(UserMealServiceTest.class);
 
@@ -95,6 +98,7 @@ public class UserMealServiceTest {
         MATCHER.assertEquals(updated, service.get(MEAL1_ID, START_SEQ));
     }
 
+    //    @Test(expected = AssertionError.class)
     @Test
     public void testNotFoundUpdate() throws Exception {
         UserMeal item = service.get(MEAL1_ID, START_SEQ);

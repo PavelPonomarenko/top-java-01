@@ -1,6 +1,7 @@
 package com.gmail.ponomarenko.service;
 
 import com.gmail.ponomarenko.LoggerWrapper;
+import com.gmail.ponomarenko.Profiles;
 import com.gmail.ponomarenko.model.BaseEntity;
 import com.gmail.ponomarenko.model.Role;
 import com.gmail.ponomarenko.model.User;
@@ -14,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -22,13 +24,13 @@ import java.util.Collections;
 import java.util.List;
 
 import static com.gmail.ponomarenko.UserTestData.*;
-import static org.mockito.Mockito.*;
 
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",
         "classpath:spring/spring-db.xml",
 })
 @RunWith(SpringJUnit4ClassRunner.class)
+@ActiveProfiles(Profiles.POSTGRES)
 public class UserServiceTest {
     private static final LoggerWrapper LOG = LoggerWrapper.get(UserServiceTest.class);
 
@@ -42,6 +44,7 @@ public class UserServiceTest {
     public void setUp() throws Exception {
         LOG.info("| ----- Test UserServiceTest.class is started ----- |");
         dbPopulator.execute();
+        service.evictCache();
     }
 
     @After
