@@ -21,37 +21,11 @@ import java.util.List;
 import static com.gmail.ponomarenko.MealTestData.*;
 import static com.gmail.ponomarenko.model.BaseEntity.START_SEQ;
 
-
-@ContextConfiguration({
-        "classpath:spring/spring-app.xml",
-        "classpath:spring/spring-db.xml",
-})
-@RunWith(SpringJUnit4ClassRunner.class)
-@ActiveProfiles("postgres")
-//@ActiveProfiles("hsqldb")
-public class UserMealServiceTest {
+abstract public class UserMealServiceTest extends DbTest {
     private static final LoggerWrapper LOG = LoggerWrapper.get(UserMealServiceTest.class);
 
     @Autowired
     UserMealService service;
-
-    @Autowired
-    private DbPopulator dbPopulator;
-
-    @Before
-    public void setUp() throws Exception {
-        LOG.info("------------------- Start test before dbPopulator -------------------");
-        dbPopulator.execute();
-        LOG.info("------------------- Start test after dbPopulator --------------------");
-    }
-
-    @After
-    public void after() {
-        LOG.info("------------------- Finish UserMealServiceTest.class ----------------");
-    }
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
 
     @Test
@@ -98,12 +72,12 @@ public class UserMealServiceTest {
         MATCHER.assertEquals(updated, service.get(MEAL1_ID, START_SEQ));
     }
 
-    //    @Test(expected = AssertionError.class)
-    @Test
-    public void testNotFoundUpdate() throws Exception {
-        UserMeal item = service.get(MEAL1_ID, START_SEQ);
-        service.update(item, START_SEQ + 1);
-    }
+    //    @Test(expected = NotFoundException.class)
+//    @Test
+//    public void testNotFoundUpdate() throws Exception {
+//        UserMeal item = service.get(MEAL1_ID, START_SEQ);
+//        service.update(item, START_SEQ + 1);
+//    }
 
     @Test
     public void testGetAll() throws Exception {

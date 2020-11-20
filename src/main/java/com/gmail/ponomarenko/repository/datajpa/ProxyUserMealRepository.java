@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Transactional
+//@Transactional(readOnly = true)
 public interface ProxyUserMealRepository extends JpaRepository<UserMeal, Integer> {
 
 
@@ -19,14 +19,14 @@ public interface ProxyUserMealRepository extends JpaRepository<UserMeal, Integer
     UserMeal save(UserMeal meal, int userId);
 
     //    @Query(name = User.DELETE)
-    @Query(name = UserMeal.DELETE)
-    @Transactional
     @Modifying
+    @Transactional
+    @Query(name = UserMeal.DELETE)
     boolean delete(int id, int userId);
 
-
-    @Query(name = UserMeal.DELETE_ALL)
+    @Modifying
     @Transactional
+    @Query(name = UserMeal.DELETE_ALL)
     void deleteAll(int userId);
 
     @Query(name = UserMeal.GET)

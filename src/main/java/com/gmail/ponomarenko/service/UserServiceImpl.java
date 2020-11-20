@@ -5,6 +5,7 @@ import com.gmail.ponomarenko.repository.UserRepository;
 import com.gmail.ponomarenko.util.exception.ExceptionUtil;
 import com.gmail.ponomarenko.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
 
+    @Qualifier("dataJpaUserRepositoryImpl")
     @Autowired
     public UserRepository repository;
 

@@ -1,6 +1,7 @@
 package com.gmail.ponomarenko.repository.datajpa;
 
 import com.gmail.ponomarenko.model.User;
+import com.gmail.ponomarenko.repository.UserRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -10,8 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Transactional(readOnly = true)
+//@Transactional(readOnly = true)
 public interface ProxyUserRepository extends JpaRepository<User, Integer> {
+
 
     @Transactional
     @Modifying
