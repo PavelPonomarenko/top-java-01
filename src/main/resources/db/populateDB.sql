@@ -3,10 +3,9 @@ DELETE FROM users;
 DELETE FROM meals;
 ALTER SEQUENCE global_seq RESTART WITH 100000;
 
--- password
 INSERT INTO users (name, email, password)
 VALUES ('User', 'user@yandex.ru', 'password');
--- admin
+
 INSERT INTO users (name, email, password)
 VALUES ('Admin', 'admin@gmail.com', 'admin');
 

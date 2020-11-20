@@ -5,7 +5,6 @@ import com.gmail.ponomarenko.model.UserMeal;
 import com.gmail.ponomarenko.repository.UserMealRepository;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -19,7 +18,6 @@ public class JpaUserMealRepositoryImpl implements UserMealRepository {
 
     @PersistenceContext
     private EntityManager em;
-
 
     @Override
     @Transactional
@@ -50,8 +48,6 @@ public class JpaUserMealRepositoryImpl implements UserMealRepository {
                 .setParameter("userId", userId)
                 .getResultList();
         return list.size() == 0 ? null : DataAccessUtils.requiredSingleResult(list);
-
-
     }
 
     @Override
@@ -61,7 +57,6 @@ public class JpaUserMealRepositoryImpl implements UserMealRepository {
                 .setParameter("userId", userId)
                 .executeUpdate();
     }
-
 
     @Override
     public List<UserMeal> getAll(int userId) {
@@ -77,6 +72,5 @@ public class JpaUserMealRepositoryImpl implements UserMealRepository {
                 .setParameter("after", startDate)
                 .setParameter("before", endDate)
                 .getResultList();
-
     }
 }

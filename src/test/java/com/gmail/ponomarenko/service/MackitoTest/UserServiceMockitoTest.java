@@ -1,42 +1,28 @@
 package com.gmail.ponomarenko.service.MackitoTest;
 
 import com.gmail.ponomarenko.LoggerWrapper;
-import com.gmail.ponomarenko.UserTestData;
 import com.gmail.ponomarenko.model.BaseEntity;
-import com.gmail.ponomarenko.model.Role;
 import com.gmail.ponomarenko.model.User;
-import com.gmail.ponomarenko.model.UserMeal;
 import com.gmail.ponomarenko.service.UserService;
-import com.gmail.ponomarenko.service.UserServiceImpl;
 import com.gmail.ponomarenko.service.UserServiceTest;
-import com.gmail.ponomarenko.util.DbPopulator;
-import com.gmail.ponomarenko.util.exception.NotFoundException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.atMost;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
-//@ContextConfiguration({
-//        "classpath:spring/spring-app.xml",
-//        "classpath:spring/spring-db.xml",
-//})
-//@RunWith(SpringJUnit4ClassRunner.class)
+
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceMockitoTest {
     private static final LoggerWrapper LOG = LoggerWrapper.get(UserServiceTest.class);
-
-//    atLeast (int min) - не меньше min вызовов;
-//    atLeastOnce () - хотя бы один вызов;
-//    atMost (int max) - не более max вызовов;
-//    times (int cnt) - cnt вызовов;
-//    never () - вызовов не было
-
 
     @Mock
     protected UserService mockUserService;

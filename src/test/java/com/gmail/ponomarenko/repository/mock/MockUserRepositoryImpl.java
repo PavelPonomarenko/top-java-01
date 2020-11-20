@@ -13,8 +13,6 @@ import java.util.List;
 public class MockUserRepositoryImpl implements UserRepository {
     private static final LoggerWrapper LOG = LoggerWrapper.get(MockUserRepositoryImpl.class);
 
-    public MockUserRepositoryImpl() {
-    }
 
     @PostConstruct
     public void postConstructor() {
@@ -30,7 +28,6 @@ public class MockUserRepositoryImpl implements UserRepository {
     @Override
     public User save(User user) {
         LOG.info("save" + user);
-
         return user;
     }
 
@@ -43,14 +40,12 @@ public class MockUserRepositoryImpl implements UserRepository {
     @Override
     public User getByEmail(String email) {
         LOG.info("email" + email);
-
         return null;
     }
 
     @Override
     public List<User> getAll() {
         LOG.info("get All");
-
         return null;
     }
 

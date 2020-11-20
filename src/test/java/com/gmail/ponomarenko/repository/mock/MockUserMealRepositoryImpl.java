@@ -1,6 +1,5 @@
 package com.gmail.ponomarenko.repository.mock;
 
-import com.gmail.ponomarenko.LoggerWrapper;
 import com.gmail.ponomarenko.model.UserMeal;
 import com.gmail.ponomarenko.repository.UserMealRepository;
 import org.springframework.stereotype.Repository;
@@ -10,7 +9,6 @@ import java.util.List;
 
 @Repository
 public class MockUserMealRepositoryImpl implements UserMealRepository {
-    private static final LoggerWrapper LOG = LoggerWrapper.get(MockUserMealRepositoryImpl.class);
 
     @Override
     public UserMeal save(UserMeal UserMeal, int userId) {

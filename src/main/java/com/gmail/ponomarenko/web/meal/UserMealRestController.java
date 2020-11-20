@@ -12,8 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
-public class
-UserMealRestController {
+public class UserMealRestController {
     private static final LoggerWrapper LOG = LoggerWrapper.get(UserMealRestController.class);
 
     @Autowired
@@ -27,14 +26,14 @@ UserMealRestController {
 
     public UserMeal update(UserMeal meal) {
         int userId = LoggedUser.id();
-        LOG.info("update {} for User {}",meal, userId);
+        LOG.info("update {} for User {}", meal, userId);
         return service.update(meal, userId);
     }
 
     public void delete(int id) {
         int userId = LoggedUser.id();
         LOG.info("delete meal {} for User {}", id, userId);
-        service.delete(id,userId);
+        service.delete(id, userId);
     }
 
     public void deleteAll() {
@@ -51,13 +50,13 @@ UserMealRestController {
 
     public List<UserMeal> getAll() {
         int userId = LoggedUser.id();
-        LOG.info("getAll for User {}",  userId);
+        LOG.info("getAll for User {}", userId);
         return service.getAll(userId);
     }
 
     public List<UserMeal> getBetween(LocalDateTime startDate, LocalDateTime endDate) {
         int userId = LoggedUser.id();
         LOG.info("getBetween {} and {} for User {}", startDate, endDate, userId);
-        return service.getBetween(startDate,endDate,userId);
+        return service.getBetween(startDate, endDate, userId);
     }
 }

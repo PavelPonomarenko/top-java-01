@@ -1,12 +1,18 @@
 package com.gmail.ponomarenko.model;
 
 import com.gmail.ponomarenko.LoggerWrapper;
-import javax.persistence.*;
+
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.SequenceGenerator;
 
 @MappedSuperclass
 @Access(AccessType.FIELD)
 public class BaseEntity {
-
     protected static final LoggerWrapper LOG = LoggerWrapper.get(BaseEntity.class);
 
     public static final int START_SEQ = 100000;

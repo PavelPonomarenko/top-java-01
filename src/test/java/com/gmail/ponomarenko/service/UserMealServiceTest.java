@@ -1,18 +1,11 @@
 package com.gmail.ponomarenko.service;
 
 import com.gmail.ponomarenko.LoggerWrapper;
-import com.gmail.ponomarenko.MealTestData;
-import com.gmail.ponomarenko.model.BaseEntity;
 import com.gmail.ponomarenko.model.UserMeal;
-import com.gmail.ponomarenko.util.DbPopulator;
 import com.gmail.ponomarenko.util.exception.NotFoundException;
-import org.junit.*;
-import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
+import org.junit.Assert;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -29,80 +22,63 @@ abstract public class UserMealServiceTest extends DbTest {
 
 
     @Test
-    public void testDelete() throws Exception {
-        LOG.info("------------------- Start testDelete  -------------------");
-
+    public void delete() throws Exception {
         service.delete(MEAL1_ID, START_SEQ);
-
-        LOG.info("------------------- testDelete after service.delete -------------------");
-
         MATCHER.assertListEquals(Arrays.asList(MEAL4, MEAL3, MEAL2), service.getAll(START_SEQ));
-
-        LOG.info("------------------- testDelete after MATCHER.assertListEquals -------------------");
-
     }
 
     @Test
-    public void testDeleteNotFound() throws Exception {
+    public void deleteNotFound() throws Exception {
         thrown.expect(NotFoundException.class);
         service.delete(MEAL1_ID, 1);
     }
 
     @Test
-    public void testSave() throws Exception {
+    public void save() throws Exception {
         UserMeal created = getCreated();
         service.save(created, START_SEQ);
         MATCHER.assertListEquals(Arrays.asList(created, MEAL4, MEAL3, MEAL2, MEAL1), service.getAll(START_SEQ));
     }
 
     @Test
-    public void testGet() throws Exception {
+    public void get() throws Exception {
         UserMeal actual = service.get(MEAL1_ID, START_SEQ);
         MATCHER.assertEquals(MEAL1, actual);
     }
 
     @Test
-    public void testGetNotFound() throws Exception {
+    public void getNotFound() throws Exception {
         thrown.expect(NotFoundException.class);
         service.get(MEAL1_ID, START_SEQ + 1);
     }
 
     @Test
-    public void testUpdate() throws Exception {
+    public void update() throws Exception {
         UserMeal updated = getUpdated();
         service.update(updated, START_SEQ);
         MATCHER.assertEquals(updated, service.get(MEAL1_ID, START_SEQ));
     }
 
-    //    @Test(expected = NotFoundException.class)
-//    @Test
-//    public void testNotFoundUpdate() throws Exception {
-//        UserMeal item = service.get(MEAL1_ID, START_SEQ);
-//        service.update(item, START_SEQ + 1);
-//    }
-
     @Test
-    public void testGetAll() throws Exception {
+    public void getAll() throws Exception {
         MATCHER.assertListEquals(Arrays.asList(MEAL4, MEAL3, MEAL2, MEAL1), service.getAll(START_SEQ));
     }
 
     @Test
-    public void testGetBetween() throws Exception {
+    public void getBetween() throws Exception {
         MATCHER.assertListEquals(Arrays.asList(MEAL2, MEAL1),
                 service.getBetween(LocalDateTime.of(2015, 1, 6, 8, 0), LocalDateTime.of(2015, 1, 6, 14, 0), START_SEQ));
     }
 
     @Test
-    public void testDeleteAll() throws Exception {
+    public void deleteAll() throws Exception {
         service.deleteAll(START_SEQ);
         List<UserMeal> userMeals = service.getAll(START_SEQ);
         Assert.assertEquals(0, service.getAll(START_SEQ).size());
-
     }
 
     @Test(expected = AssertionError.class)
     public void tryingSaveDuplicateMeal() {
-
         int startNum = service.getAll(START_SEQ).size();
         service.save(MEAL1, START_SEQ);
         service.save(MEAL2, START_SEQ);
@@ -119,6 +95,5 @@ abstract public class UserMealServiceTest extends DbTest {
         UserMeal updated = getUpdated();
         service.update(updated, START_SEQ);
         MATCHER.assertEquals(updated, service.get(MEAL1_ID, START_SEQ));
-
     }
 }

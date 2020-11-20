@@ -14,9 +14,6 @@ public class UserRestController {
     @Autowired
     private UserService service;
 
-    public UserRestController() {
-    }
-
     public User get() {
         int id = LoggedUser.id();
         LOG.info("get", id);

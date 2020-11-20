@@ -6,9 +6,8 @@
 
     <jmxConfigurator/>
 
-    <!--file appender-->
     <appender name="file" class="ch.qos.logback.core.FileAppender">
-<!--        <file>${TOPJAVA_ROOT}/log/topjava.log</file>-->
+        <!--        <file>${TOPJAVA_ROOT}/log/topjava.log</file>-->
         <file>/log/topjava.log</file>
         <encoder>
             <charset>UTF-8</charset>
@@ -16,7 +15,6 @@
         </encoder>
     </appender>
 
-    <!--console appender-->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <!--        <file>${TOPJAVA_ROOT}/log/topjava.log</file>-->
         <encoder>

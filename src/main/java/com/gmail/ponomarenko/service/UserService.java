@@ -3,7 +3,6 @@ package com.gmail.ponomarenko.service;
 import com.gmail.ponomarenko.model.User;
 import com.gmail.ponomarenko.util.exception.NotFoundException;
 
-
 import java.util.List;
 
 public interface UserService {

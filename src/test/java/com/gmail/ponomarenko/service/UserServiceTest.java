@@ -20,19 +20,17 @@ import static com.gmail.ponomarenko.UserTestData.*;
 abstract public class UserServiceTest extends DbTest {
     private static final LoggerWrapper LOG = LoggerWrapper.get(UserServiceTest.class);
 
-////    @Autowired
-//    protected UserService userService;
     @Autowired
     DbPopulator dbPopulator;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         dbPopulator.execute();
         userService.evictCache();
     }
 
     @Test
-    public void testSave() throws Exception {
+    public void save() {
         TestUser tu = new TestUser("New", "new@gmail.com", "newPass", Role.ROLE_USER);
         User created = userService.save(tu.asUser());
         tu.setId(created.getId());
@@ -40,46 +38,44 @@ abstract public class UserServiceTest extends DbTest {
     }
 
     @Test(expected = DataAccessException.class)
-    public void testDuplicateEMailSave() throws Exception {
+    public void duplicateEMailSave() {
         userService.save(new TestUser("Duplicate", "user@yandex.ru", "newPass", Role.ROLE_USER).asUser());
     }
 
     @Test
-    public void testDelete() throws Exception {
+    public void delete() {
         userService.delete(BaseEntity.START_SEQ);
         MATCHER.assertListEquals(Collections.singletonList(ADMIN), userService.getAll());
     }
 
     @Test(expected = NotFoundException.class)
-    public void testNotFoundDelete() throws Exception {
+    public void notFoundDelete() throws Exception {
         userService.delete(1);
     }
 
     @Test
-    public void testGet() throws Exception {
+    public void get() throws Exception {
         User user = userService.get(BaseEntity.START_SEQ);
         MATCHER.assertEquals(USER, user);
     }
 
     @Test
-    public void testGetByEmail() throws Exception {
+    public void getByEmail() throws Exception {
         User user = userService.getByEmail("user@yandex.ru");
         MATCHER.assertEquals(USER, user);
-
     }
 
     @Test
-    public void testGetAll() throws Exception {
+    public void getAll() throws Exception {
         List<User> all = userService.getAll();
         MATCHER.assertListEquals(Arrays.asList(ADMIN, USER), all);
     }
 
     @Test
-    public void testUpdate() throws Exception {
+    public void update() throws Exception {
         TestUser updated = new TestUser(USER);
         updated.setName("UpdatedName");
         userService.update(updated.asUser());
         MATCHER.assertEquals(updated, userService.get(BaseEntity.START_SEQ));
     }
-
 }

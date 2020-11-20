@@ -1,9 +1,7 @@
 package com.gmail.ponomarenko;
 
 import com.gmail.ponomarenko.model.Role;
-import org.springframework.stereotype.Controller;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 
