@@ -16,7 +16,6 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
 
-    @Qualifier("dataJpaUserRepositoryImpl")
     @Autowired
     public UserRepository repository;
 

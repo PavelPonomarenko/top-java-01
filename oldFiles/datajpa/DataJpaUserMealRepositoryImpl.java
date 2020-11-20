@@ -14,23 +14,23 @@ import java.util.List;
 public class DataJpaUserMealRepositoryImpl implements UserMealRepository {
     @Autowired
     private ProxyUserMealRepository proxy;
+//    @Autowired
+//    private ProxyUserRepository userProxy;
 
-    @Autowired
-    private ProxyUserRepository userProxy;
 
     @Override
-    @Transactional
-    public UserMeal save(UserMeal userMeal, int userId) {
-        userMeal.setUser(userProxy.getOne(userId));
-        if (!userMeal.isNew() && get(userMeal.getId(), userId) == null) {
-            return null;
-        }
-        return proxy.save(userMeal);
+    public UserMeal save(UserMeal meal, int userId) {
+        return null;
     }
 
     @Override
     public boolean delete(int id, int userId) {
-        return proxy.delete(id, userId) != 0;
+        return proxy.delete(id, userId);
+    }
+
+    @Override
+    public void deleteAll(int userId) {
+        proxy.deleteAll(userId);
     }
 
     @Override
@@ -44,12 +44,8 @@ public class DataJpaUserMealRepositoryImpl implements UserMealRepository {
     }
 
     @Override
-    public void deleteAll(int userId) {
-        proxy.deleteAll(userId);
-    }
-
-    @Override
     public List<UserMeal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
         return proxy.getBetween(startDate, endDate, userId);
     }
+
 }

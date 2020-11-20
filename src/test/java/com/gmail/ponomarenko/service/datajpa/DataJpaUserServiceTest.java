@@ -8,4 +8,5 @@ import static com.gmail.ponomarenko.Profiles.POSTGRES;
 
 @ActiveProfiles({POSTGRES, DATAJPA})
 public class DataJpaUserServiceTest extends UserServiceTest {
+
 }

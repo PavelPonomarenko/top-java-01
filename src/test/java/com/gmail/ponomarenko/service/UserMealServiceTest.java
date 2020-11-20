@@ -33,9 +33,11 @@ abstract public class UserMealServiceTest extends DbTest {
         LOG.info("------------------- Start testDelete  -------------------");
 
         service.delete(MEAL1_ID, START_SEQ);
+
         LOG.info("------------------- testDelete after service.delete -------------------");
 
         MATCHER.assertListEquals(Arrays.asList(MEAL4, MEAL3, MEAL2), service.getAll(START_SEQ));
+
         LOG.info("------------------- testDelete after MATCHER.assertListEquals -------------------");
 
     }
