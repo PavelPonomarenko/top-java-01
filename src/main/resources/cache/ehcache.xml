@@ -23,6 +23,7 @@
            diskPersistent="false"
            diskExpiryThreadIntervalSeconds="1"
            memoryStoreEvictionPolicy="LRU"/>
+
     <cache name="com.gmail.ponomarenko.model.User"
            maxElementsInMemory="1000"/>
 
