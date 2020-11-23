@@ -1,7 +1,8 @@
 package com.gmail.ponomarenko.web;
 
 import com.gmail.ponomarenko.LoggerWrapper;
-import com.gmail.ponomarenko.service.UserService;
+import com.gmail.ponomarenko.model.BaseEntity;
+import com.gmail.ponomarenko.service.UserMealService;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -12,10 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
-public class UserServlet extends HttpServlet {
-
-    private static final LoggerWrapper LOG = LoggerWrapper.get(UserServlet.class);
+public class UserMealServlet extends HttpServlet {
+    private static final LoggerWrapper LOG = LoggerWrapper.get(UserMealServlet.class);
     private WebApplicationContext wac;
 
     @Override
@@ -25,9 +24,11 @@ public class UserServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        LOG.debug("forward to userList");
-        UserService userService = wac.getBean(UserService.class);
-        request.setAttribute("userList", userService.getAll());
-        request.getRequestDispatcher("/WEB-INF/jsp/userList.jsp").forward(request, response);
+        LOG.debug("forward to userMealList");
+        UserMealService userMealService = wac.getBean(UserMealService.class);
+
+        request.setAttribute("mealList", userMealService.getAll(BaseEntity.START_SEQ));
+        request.getRequestDispatcher("/WEB-INF/jsp/userMealList.jsp").forward(request, response);
     }
+
 }

@@ -65,6 +65,11 @@ public class UserMeal extends BaseEntity {
         return dateTime;
     }
 
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
+
     public String getDescription() {
         return description;
     }
@@ -73,20 +78,21 @@ public class UserMeal extends BaseEntity {
         this.description = meal;
     }
 
-    public int getCalories() {
-        return calories;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public User getUser() {
         return user;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
-    }
 
     public void setCalories(int calories) {
         this.calories = calories;
+    }
+
+    public int getCalories() {
+        return calories;
     }
 
     @Override
@@ -94,9 +100,6 @@ public class UserMeal extends BaseEntity {
         return "Meal(" + id + ", " + TimeUtil.toString(dateTime) + ", '" + description + "', calories:" + calories + ')';
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     @Override
     public boolean equals(Object o) {
