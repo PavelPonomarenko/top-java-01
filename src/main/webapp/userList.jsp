@@ -3,6 +3,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html>
+<jsp:include page="fragments/headTag.jsp"/>
+<body>
+<jsp:include page="fragments/bodyHeader.jsp"/>
 
 <section>
     <table border="1" cellpadding="8" cellspacing="0">
@@ -30,5 +33,7 @@
     </table>
 </section>
 <hr>
+<jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>
+
