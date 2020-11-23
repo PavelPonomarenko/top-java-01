@@ -26,5 +26,4 @@
 
     <cache name="com.gmail.ponomarenko.model.User"
            maxElementsInMemory="1000"/>
-
 </ehcache>

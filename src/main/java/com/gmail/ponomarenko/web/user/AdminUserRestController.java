@@ -10,6 +10,7 @@ import java.util.List;
 
 @Controller
 public class AdminUserRestController {
+
     private static final LoggerWrapper LOG = LoggerWrapper.get(AdminUserRestController.class);
 
     @Autowired
@@ -42,6 +43,7 @@ public class AdminUserRestController {
         LOG.info("update" + user);
         service.update(user);
     }
+
     public User getByEmail(String email) {
         LOG.info("getByEmail" + email);
         return service.getByEmail(email);

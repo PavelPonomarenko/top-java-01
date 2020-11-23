@@ -12,6 +12,7 @@ import java.util.List;
 
 @Repository
 public class DataJpaUserMealRepositoryImpl implements UserMealRepository {
+
     @Autowired
     private ProxyUserMealRepository proxy;
 

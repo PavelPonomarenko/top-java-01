@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import static java.time.LocalDateTime.of;
 
 public class MealTestData {
+
     public static final int MEAL1_ID = BaseEntity.START_SEQ + 2;
 
     public static final UserMeal MEAL1 = new UserMeal(MEAL1_ID, LocalDateTime.of(2015, 1, 6, 9, 0), "breakfast", 500);

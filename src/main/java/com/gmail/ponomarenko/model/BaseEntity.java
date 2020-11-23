@@ -13,6 +13,7 @@ import javax.persistence.SequenceGenerator;
 @MappedSuperclass
 @Access(AccessType.FIELD)
 public class BaseEntity {
+
     protected static final LoggerWrapper LOG = LoggerWrapper.get(BaseEntity.class);
 
     public static final int START_SEQ = 100000;

@@ -6,9 +6,6 @@ import org.hibernate.SessionFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-/**
- * invalidate second level Hibernate cache for tests
- */
 public class JpaUtil {
 
     @PersistenceContext
@@ -17,9 +14,7 @@ public class JpaUtil {
     public void clear2ndLevelHibernateCache() {
         Session s = (Session) em.getDelegate();
         SessionFactory sf = s.getSessionFactory();
-//        sf.evict(User.class);
-//        sf.getCache().evictEntity(User.class, BaseEntity.START_SEQ);
-//        sf.getCache().evictEntityRegion(User.class);
+
         sf.getCache().evictQueryRegions();
         sf.getCache().evictDefaultQueryRegion();
         sf.getCache().evictCollectionRegions();

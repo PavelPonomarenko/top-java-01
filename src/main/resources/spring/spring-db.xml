@@ -73,7 +73,6 @@
                            value="false"/> <!--default-->
                     <entry key="#{T(org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory).NET_SF_EHCACHE_CONFIGURATION_RESOURCE_NAME}"
                            value="cache/ehcache.xml"/>
-
                 </map>
             </property>
 

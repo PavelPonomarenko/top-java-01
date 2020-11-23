@@ -7,6 +7,7 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public class NamedEntity extends BaseEntity {
+
     @NotEmpty
     @Column(name = "name", nullable = false)
     protected String name;

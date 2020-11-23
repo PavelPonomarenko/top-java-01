@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class UserRestController {
+
     private static final LoggerWrapper LOG = LoggerWrapper.get(UserRestController.class);
 
     @Autowired
