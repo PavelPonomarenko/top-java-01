@@ -1,4 +1,4 @@
-package com.gmail.ponomarenko.service.MackitoTest;
+package com.gmail.ponomarenko.service.mockitotest;
 
 import com.gmail.ponomarenko.LoggerWrapper;
 import com.gmail.ponomarenko.model.BaseEntity;
