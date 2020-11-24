@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@ContextConfiguration({"classpath:spring/spring-app.xml","classpath:spring/mock.xml"})
+@ContextConfiguration({"classpath:spring/spring-app.xml",
+        "classpath:spring/mock.xml", "classpath:spring/spring-mvc.xml"
+})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class UserAdminSpringMockTest {
     @Autowired
@@ -19,7 +21,7 @@ public class UserAdminSpringMockTest {
 
     @Test
     public void testCreate() throws Exception {
-        controller.create(new User(null, "Name", "email@gamil.com","newPass",true, Role.ROLE_USER));
+        controller.create(new User(null, "Name", "email@gamil.com", "newPass", true, Role.ROLE_USER));
     }
 
     @Test

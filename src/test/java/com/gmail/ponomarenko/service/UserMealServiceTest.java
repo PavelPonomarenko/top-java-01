@@ -1,6 +1,5 @@
 package com.gmail.ponomarenko.service;
 
-import com.gmail.ponomarenko.LoggerWrapper;
 import com.gmail.ponomarenko.model.UserMeal;
 import com.gmail.ponomarenko.util.exception.NotFoundException;
 import org.junit.Assert;
@@ -11,11 +10,17 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.gmail.ponomarenko.MealTestData.*;
+import static com.gmail.ponomarenko.MealTestData.MATCHER;
+import static com.gmail.ponomarenko.MealTestData.MEAL1;
+import static com.gmail.ponomarenko.MealTestData.MEAL1_ID;
+import static com.gmail.ponomarenko.MealTestData.MEAL2;
+import static com.gmail.ponomarenko.MealTestData.MEAL3;
+import static com.gmail.ponomarenko.MealTestData.MEAL4;
+import static com.gmail.ponomarenko.MealTestData.getCreated;
+import static com.gmail.ponomarenko.MealTestData.getUpdated;
 import static com.gmail.ponomarenko.model.BaseEntity.START_SEQ;
 
 abstract public class UserMealServiceTest extends DbTest {
-    private static final LoggerWrapper LOG = LoggerWrapper.get(UserMealServiceTest.class);
 
     @Autowired
     UserMealService service;

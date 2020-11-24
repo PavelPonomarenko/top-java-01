@@ -12,22 +12,21 @@
 
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
-<hr>
 <body>
 <jsp:include page="fragments/bodyHeader.jsp"/>
 <hr>
-<h2> ------------------- Meal list --------------------- </h2>
+<h2> ------------------- meal list --------------------- </h2>
 <section>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>
-            <th>Meal code</th>
+            <th>id meal</th>
             <th>Date and time of meal</th>
             <th>Description</th>
             <th>Calories</th>
         </tr>
         </thead>
-        <c:forEach items="${mealList}" var="meal">
+        <c:forEach items="${userMealList}" var="meal">
             <jsp:useBean id="meal" scope="page" type="com.gmail.ponomarenko.model.UserMeal"/>
             <tr>
                 <td>${meal.id}</td>
@@ -40,7 +39,6 @@
         </c:forEach>
     </table>
 </section>
-
 <hr>
 <jsp:include page="fragments/footer.jsp"/>
 <hr>

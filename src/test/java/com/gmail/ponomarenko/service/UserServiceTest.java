@@ -1,33 +1,22 @@
 package com.gmail.ponomarenko.service;
 
-import com.gmail.ponomarenko.LoggerWrapper;
 import com.gmail.ponomarenko.model.BaseEntity;
 import com.gmail.ponomarenko.model.Role;
 import com.gmail.ponomarenko.model.User;
-import com.gmail.ponomarenko.util.DbPopulator;
 import com.gmail.ponomarenko.util.exception.NotFoundException;
-import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static com.gmail.ponomarenko.UserTestData.*;
+import static com.gmail.ponomarenko.UserTestData.ADMIN;
+import static com.gmail.ponomarenko.UserTestData.MATCHER;
+import static com.gmail.ponomarenko.UserTestData.TestUser;
+import static com.gmail.ponomarenko.UserTestData.USER;
 
 abstract public class UserServiceTest extends DbTest {
-    private static final LoggerWrapper LOG = LoggerWrapper.get(UserServiceTest.class);
-
-    @Autowired
-    DbPopulator dbPopulator;
-
-    @Before
-    public void setUp() {
-        dbPopulator.execute();
-        userService.evictCache();
-    }
 
     @Test
     public void save() {

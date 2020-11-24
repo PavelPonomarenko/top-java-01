@@ -1,6 +1,5 @@
 package com.gmail.ponomarenko.service;
 
-import com.gmail.ponomarenko.repository.JpaUtil;
 import com.gmail.ponomarenko.util.DbPopulator;
 import org.junit.Before;
 import org.junit.Rule;
@@ -13,7 +12,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",
-        "classpath:spring/spring-db.xml"
+        "classpath:spring/spring-db.xml",
+        "classpath:spring/spring-mvc.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 abstract public class DbTest {
@@ -21,11 +21,9 @@ abstract public class DbTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    @Autowired
-    private JpaUtil jpaUtil;
+
     @Autowired
     private DbPopulator dbPopulator;
-
 
     @Autowired
     protected UserService userService;
@@ -34,6 +32,5 @@ abstract public class DbTest {
     public void setUp() throws Exception {
         dbPopulator.execute();
         userService.evictCache();
-        jpaUtil.clear2ndLevelHibernateCache();
     }
 }
