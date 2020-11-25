@@ -1,6 +1,7 @@
 package com.gmail.ponomarenko.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.Email;
@@ -19,6 +20,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.Set;
@@ -60,6 +63,7 @@ public class User extends NamedEntity {
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
     protected Set<Role> roles;
 
     public User() {
@@ -116,6 +120,15 @@ public class User extends NamedEntity {
     public String getPassword() {
         return password;
     }
+
+    public void setRoles(Role... authorities) {
+        setRoles(EnumSet.copyOf(Arrays.asList(authorities)));
+    }
+
+    public void setRoles(Set<Role> authorities) {
+        this.roles = Collections.unmodifiableSet(authorities);
+    }
+
 
     @Override
     public String toString() {

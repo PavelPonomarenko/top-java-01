@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
-public class UserRestController {
+@RequestMapping("/rest/profile")
+public class ProfileRestController {
 
     @Autowired
     private UserHelper helper;
@@ -27,35 +29,12 @@ public class UserRestController {
 
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@RequestBody User user) {
-        helper.update(user);
+        helper.update(user, LoggedUser.id());
+    }
+
+    @RequestMapping(value = "/text", method = RequestMethod.GET)
+    public String testUTF() {
+        return "Русский текст";
     }
 }
 
-//@Controller
-//public class UserRestController {
-//
-//    private static final LoggerWrapper LOG = LoggerWrapper.get(UserRestController.class);
-//
-//    @Autowired
-//    private UserService service;
-//
-//    public User get() {
-//        int id = LoggedUser.id();
-//        LOG.info("get", id);
-//        return service.get(id);
-//    }
-//
-//    public void delete() {
-//        int id = LoggedUser.id();
-//        LOG.info("delete {}", id);
-//        service.delete(id);
-//
-//    }
-//
-//    public void update(User user) {
-//        int id = LoggedUser.id();
-//        LOG.info("update");
-//        service.update(user);
-//
-//    }
-//}

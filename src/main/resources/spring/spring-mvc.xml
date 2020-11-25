@@ -7,6 +7,16 @@
 
 
     <context:component-scan base-package="com.gmail.ponomarenko.**.web"/>
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper">
+                    <bean class="ru.javawebinar.topjava.util.mapper.HibernateAwareObjectMapper"/>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
     <mvc:annotation-driven/>
 
     <mvc:resources mapping="/resources/**" location="/resources/"/>
@@ -22,7 +32,7 @@
 
         <property name="basenames">
             <list>
-                <value>messages/app</value>
+                <value>messages.app</value>
             </list>
         </property>
     </bean>

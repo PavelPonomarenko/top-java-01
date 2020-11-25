@@ -3,7 +3,7 @@ package com.gmail.ponomarenko.web.mock;
 import com.gmail.ponomarenko.model.Role;
 import com.gmail.ponomarenko.model.User;
 import com.gmail.ponomarenko.util.exception.NotFoundException;
-import com.gmail.ponomarenko.web.user.AdminUserRestController;
+import com.gmail.ponomarenko.web.user.AdminRestController;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,13 +15,13 @@ import java.util.Arrays;
 
 public class UserAdminMockTest {
     private static ConfigurableApplicationContext appCtx;
-    private static AdminUserRestController controller;
+    private static AdminRestController controller;
 
     @BeforeClass
     public static void beforeClass() {
         appCtx = new ClassPathXmlApplicationContext("spring/spring-mvc.xml","spring/spring-app.xml", "spring/mock.xml");
         System.out.println("\n" + Arrays.toString(appCtx.getBeanDefinitionNames()) + "\n");
-        controller = appCtx.getBean(AdminUserRestController.class);
+        controller = appCtx.getBean(AdminRestController.class);
     }
 
     @AfterClass

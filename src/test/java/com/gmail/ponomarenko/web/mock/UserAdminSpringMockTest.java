@@ -3,7 +3,7 @@ package com.gmail.ponomarenko.web.mock;
 import com.gmail.ponomarenko.model.Role;
 import com.gmail.ponomarenko.model.User;
 import com.gmail.ponomarenko.util.exception.NotFoundException;
-import com.gmail.ponomarenko.web.user.AdminUserRestController;
+import com.gmail.ponomarenko.web.user.AdminRestController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class UserAdminSpringMockTest {
     @Autowired
-    private AdminUserRestController controller;
+    private AdminRestController controller;
 
 
     @Test
