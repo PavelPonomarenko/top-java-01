@@ -36,6 +36,11 @@ public class UserTestData {
             return new User(this);
         }
 
+        public User copyAsUser() {
+            return new User(this);
+        }
+
+
         @Override
         public String toString() {
             return "User (" +
@@ -59,10 +64,11 @@ public class UserTestData {
                     && Objects.equals(this.id, that.id)
                     && Objects.equals(this.name, that.name)
                     && Objects.equals(this.email, that.email)
-                    && Objects.equals(this.enabled, that.enabled);
+                    && Objects.equals(this.enabled, that.enabled)
+                    && Objects.equals(this.roles, that.roles);
         }
     }
 
     public static final ModelMatcher<User, TestUser> MATCHER = new ModelMatcher<>(
-            u -> ((u instanceof TestUser) ? (TestUser) u : new TestUser(u)));
+            u -> ((u instanceof TestUser) ? (TestUser) u : new TestUser(u)), User.class);
 }

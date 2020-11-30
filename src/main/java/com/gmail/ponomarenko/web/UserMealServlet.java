@@ -30,5 +30,4 @@ public class UserMealServlet extends HttpServlet {
         request.setAttribute("mealList", userMealService.getAll(BaseEntity.START_SEQ));
         request.getRequestDispatcher("/WEB-INF/jsp/userMealList.jsp").forward(request, response);
     }
-
 }

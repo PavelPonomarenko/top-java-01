@@ -1,7 +1,5 @@
 package com.gmail.ponomarenko.web.mock;
 
-import com.gmail.ponomarenko.model.Role;
-import com.gmail.ponomarenko.model.User;
 import com.gmail.ponomarenko.util.exception.NotFoundException;
 import com.gmail.ponomarenko.web.user.AdminRestController;
 import org.junit.AfterClass;
@@ -19,19 +17,13 @@ public class UserAdminMockTest {
 
     @BeforeClass
     public static void beforeClass() {
-        appCtx = new ClassPathXmlApplicationContext("spring/spring-mvc.xml","spring/spring-app.xml", "spring/mock.xml");
+        appCtx = new ClassPathXmlApplicationContext("spring/spring-mvc.xml", "spring/spring-app.xml", "spring/mock.xml");
         System.out.println("\n" + Arrays.toString(appCtx.getBeanDefinitionNames()) + "\n");
         controller = appCtx.getBean(AdminRestController.class);
     }
 
     @AfterClass
     public static void afterClass() {
-        appCtx.close();
-    }
-
-    @Test
-    public void testCreate() throws Exception {
-        controller.create(new User(null, "Name", "email@ya.ru", "password", true, Role.ROLE_USER));
     }
 
     @Test
@@ -43,4 +35,5 @@ public class UserAdminMockTest {
     public void testDeleteNotFound() throws Exception {
         controller.delete(0);
     }
+
 }

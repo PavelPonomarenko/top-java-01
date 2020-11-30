@@ -1,17 +1,37 @@
 package com.gmail.ponomarenko.matcher;
 
-import org.junit.Assert;
 
+import com.gmail.ponomarenko.TestUtil;
+import com.gmail.ponomarenko.web.json.JsonUtil;
+import org.junit.Assert;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.ResultMatcher;
+
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 public class ModelMatcher<T, R> {
+
     protected Function<T, R> entityConverter;
 
-    public ModelMatcher(Function<T, R> entityConverter) {
+    protected Class<T> entityClass;
+
+    public ModelMatcher(Function<T, R> entityConverter, Class<T> entityClass) {
         this.entityConverter = entityConverter;
+        this.entityClass = entityClass;
+    }
+
+    private T fromJsonValue(String json) {
+        return JsonUtil.readValue(json, entityClass);
+    }
+
+    private List<T> fromJsonValues(String json) {
+        return JsonUtil.readValues(json, entityClass);
     }
 
     public void assertEquals(T expected, T actual) {
@@ -24,5 +44,32 @@ public class ModelMatcher<T, R> {
 
     public static <S, T> List<T> map(List<S> list, Function<S, T> converter) {
         return list.stream().map(converter).collect(Collectors.toList());
+    }
+
+    public ResultMatcher contentMatcher(T expect) {
+        return content().string(
+                new TestMatcher<T>(expect) {
+                    @Override
+                    protected boolean compare(T expected, String body) {
+                        R actualForCompare = entityConverter.apply(fromJsonValue(body));
+                        R expectedForCompare = entityConverter.apply(expected);
+                        return expectedForCompare.equals(actualForCompare);
+                    }
+                });
+    }
+
+    public final ResultMatcher contentListMatcher(T... expected) {
+        return content().string(new TestMatcher<List<T>>(Arrays.asList(expected)) {
+            @Override
+            protected boolean compare(List<T> expected, String actual) {
+                List<R> actualList = map(fromJsonValues(actual), entityConverter);
+                List<R> expectedList = map(expected, entityConverter);
+                return expectedList.equals(actualList);
+            }
+        });
+    }
+
+    public T fromJsonAction(ResultActions action) throws UnsupportedEncodingException {
+        return fromJsonValue(TestUtil.getContent(action));
     }
 }

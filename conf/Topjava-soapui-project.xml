@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="Topjava02" resourceRoot="" soapui-version="5.6.0" abortOnError="false" runType="SEQUENTIAL" id="e5d3ca96-1aa8-41eb-b430-d3c57a611003" xmlns:con="http://eviware.com/soapui/config">
+    <con:settings/>
+    <con:interface xsi:type="con:RestService" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://localhost:8080" type="rest" id="8199e551-5597-40b8-97f1-91a8a5417ee0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <con:settings/>
+        <con:definitionCache/>
+        <con:endpoints>
+            <con:endpoint>http://localhost:8080</con:endpoint>
+        </con:endpoints>
+        <con:resource name="" path="/topjava/rest/meals/between" id="b5fcda42-e545-498f-9fd1-ae488c4f4d56">
+            <con:settings/>
+            <con:parameters>
+                <con:parameter>
+                    <con:name>startDate</con:name>
+                    <con:value/>
+                    <con:style>QUERY</con:style>
+                    <con:default/>
+                    <con:description xsi:nil="true"/>
+                </con:parameter>
+                <con:parameter>
+                    <con:name>endDate</con:name>
+                    <con:value/>
+                    <con:style>QUERY</con:style>
+                    <con:default/>
+                    <con:description xsi:nil="true"/>
+                </con:parameter>
+            </con:parameters>
+            <con:method name="" method="GET" id="0e5c8084-bb09-4bbc-8eeb-77cc4129dee5">
+                <con:settings/>
+                <con:parameters/>
+                <con:representation type="FAULT">
+                    <con:mediaType>text/html;charset=utf-8</con:mediaType>
+                    <con:status>500 404 400</con:status>
+                    <con:params/>
+                    <con:element>html</con:element>
+                </con:representation>
+                <con:representation type="RESPONSE">
+                    <con:mediaType>application/json</con:mediaType>
+                    <con:status>200</con:status>
+                    <con:params/>
+                    <con:element xmlns:ns="http://localhost/topjava/rest/admin/users/100000">ns:Response</con:element>
+                </con:representation>
+                <con:representation type="RESPONSE">
+                    <con:mediaType>application/json;charset=UTF-8</con:mediaType>
+                    <con:status>200</con:status>
+                    <con:params/>
+                    <con:element xmlns:ns="http://localhost/topjava/meals/100002">ns:Response</con:element>
+                </con:representation>
+                <con:representation type="FAULT">
+                    <con:mediaType xsi:nil="true"/>
+                    <con:status>404</con:status>
+                    <con:params/>
+                    <con:element>data</con:element>
+                </con:representation>
+                <con:representation type="RESPONSE">
+                    <con:mediaType xsi:nil="true"/>
+                    <con:status>0</con:status>
+                    <con:params/>
+                    <con:element>data</con:element>
+                </con:representation>
+                <con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="AdminGetAll" mediaType="application/json" postQueryString="false" id="dfc83e04-6186-422d-a6e2-9e03af546854">
+                    <con:settings>
+                        <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+                    </con:settings>
+                    <con:endpoint>http://localhost:8080</con:endpoint>
+                    <con:request/>
+                    <con:originalUri>http://localhost/topjava/meals/100002</con:originalUri>
+                    <con:credentials>
+                        <con:selectedAuthProfile>Basic</con:selectedAuthProfile>
+                        <con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes>
+                        <con:authType>Global HTTP Settings</con:authType>
+                    </con:credentials>
+                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+                    <con:jmsPropertyConfig/>
+                    <con:parameters>
+                        <con:entry key="startDate" value="2015-01-06 13:00"/>
+                        <con:entry key="endDate" value="2015-01-07 00:00"/>
+                    </con:parameters>
+                    <con:parameterOrder>
+                        <con:entry>startDate</con:entry>
+                        <con:entry>endDate</con:entry>
+                    </con:parameterOrder>
+                </con:request>
+            </con:method>
+            <con:method name="" method="POST" id="838b4f8d-97d5-4b66-890d-864dd20ce372">
+                <con:settings/>
+                <con:parameters/>
+                <con:representation type="REQUEST">
+                    <con:mediaType>application/json</con:mediaType>
+                    <con:params/>
+                </con:representation>
+                <con:representation type="FAULT">
+                    <con:mediaType>text/html;charset=utf-8</con:mediaType>
+                    <con:status>500</con:status>
+                    <con:params/>
+                    <con:element>html</con:element>
+                </con:representation>
+                <con:representation type="RESPONSE">
+                    <con:mediaType>application/json</con:mediaType>
+                    <con:status>201</con:status>
+                    <con:params/>
+                    <con:element xmlns:user="http://localhost/topjava/rest/admin/users">user:Response</con:element>
+                </con:representation>
+                <con:request name="AdminCreate" mediaType="application/json" postQueryString="false" id="5f6bbb02-6aaf-41dc-a872-8ad90b261dc9">
+                    <con:settings>
+                        <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/>
+                        </con:setting>
+                    </con:settings>
+                    <con:endpoint>http://localhost:8080</con:endpoint>
+                    <con:request>{
+                        "name": "New2",
+                        "email": "new2@yandex.ru",
+                        "password": "passwordNew",
+                        "roles": ["ROLE_USER"]
+                        }
+                    </con:request>
+                    <con:credentials>
+                        <con:authType>Global HTTP Settings</con:authType>
+                    </con:credentials>
+                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+                    <con:jmsPropertyConfig/>
+                    <con:parameters/>
+                    <con:parameterOrder>
+                        <con:entry>startDate</con:entry>
+                        <con:entry>endDate</con:entry>
+                    </con:parameterOrder>
+                </con:request>
+            </con:method>
+        </con:resource>
+        <con:resource name="" path="/topjava/rest/admin/users/100000" id="a9263f65-8ad1-4c38-8868-2d13d846c653">
+            <con:settings/>
+            <con:parameters/>
+            <con:method name="" method="GET" id="d0f34f39-e8db-4b93-8da0-4b116725e94f">
+                <con:settings/>
+                <con:parameters/>
+                <con:representation type="FAULT">
+                    <con:mediaType>text/html;charset=utf-8</con:mediaType>
+                    <con:status>500</con:status>
+                    <con:params/>
+                    <con:element>html</con:element>
+                </con:representation>
+                <con:representation type="RESPONSE">
+                    <con:mediaType>application/json</con:mediaType>
+                    <con:status>200</con:status>
+                    <con:params/>
+                    <con:element xmlns:ns="http://localhost/topjava/rest/admin/users/100000">ns:Response</con:element>
+                </con:representation>
+                <con:request name="AdminGet" mediaType="application/json" id="d11e0fb9-e8b8-421a-a2b4-073cccb58494">
+                    <con:settings>
+                        <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/>
+                        </con:setting>
+                    </con:settings>
+                    <con:endpoint>http://localhost:8080</con:endpoint>
+                    <con:request/>
+                    <con:credentials>
+                        <con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType>
+                    </con:credentials>
+                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+                    <con:jmsPropertyConfig/>
+                    <con:parameters/>
+                </con:request>
+            </con:method>
+            <con:method name="" method="PUT" id="dad5f477-6e1c-4c53-9fa2-72bcf7b31082">
+                <con:settings/>
+                <con:parameters/>
+                <con:representation type="FAULT">
+                    <con:mediaType>text/html;charset=utf-8</con:mediaType>
+                    <con:status>405 500</con:status>
+                    <con:params/>
+                    <con:element>html</con:element>
+                </con:representation>
+                <con:representation type="REQUEST">
+                    <con:mediaType>application/json</con:mediaType>
+                    <con:params/>
+                </con:representation>
+                <con:representation type="RESPONSE">
+                    <con:mediaType xsi:nil="true"/>
+                    <con:status>200</con:status>
+                    <con:params/>
+                    <con:element>data</con:element>
+                </con:representation>
+                <con:representation type="RESPONSE">
+                    <con:mediaType xsi:nil="true"/>
+                    <con:status>200</con:status>
+                    <con:params/>
+                    <con:element>data</con:element>
+                </con:representation>
+                <con:request name="AdminUpdate" mediaType="application/json" postQueryString="false" id="ad91c0c0-016f-404e-a16a-c88b3dd8af52">
+                    <con:settings>
+                        <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/>
+                        </con:setting>
+                    </con:settings>
+                    <con:endpoint>http://localhost:8080</con:endpoint>
+                    <con:request>{
+                        "name": "UserUpdated",
+                        "email": "user@yandex.ru",
+                        "password": "passwordNew",
+                        "roles": ["ROLE_USER"]
+                        }
+                    </con:request>
+                    <con:credentials>
+                        <con:authType>Global HTTP Settings</con:authType>
+                    </con:credentials>
+                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+                    <con:jmsPropertyConfig/>
+                    <con:parameters/>
+                </con:request>
+            </con:method>
+        </con:resource>
+        <con:resource name="" path="/topjava/rest/profile" id="e45c84f3-e3a6-4a93-8832-b4a91e9c217c">
+            <con:settings/>
+            <con:parameters/>
+            <con:method name="" method="GET" id="7d8c44df-841f-4916-97c9-68a575332e00">
+                <con:settings/>
+                <con:parameters/>
+                <con:representation type="FAULT">
+                    <con:mediaType>text/html;charset=utf-8</con:mediaType>
+                    <con:status>500</con:status>
+                    <con:params/>
+                    <con:element>html</con:element>
+                </con:representation>
+                <con:representation type="RESPONSE">
+                    <con:mediaType>application/json</con:mediaType>
+                    <con:status>200</con:status>
+                    <con:params/>
+                    <con:element xmlns:ns="http://localhost/topjava/rest/admin/users/100000">ns:Response</con:element>
+                </con:representation>
+                <con:request name="Get" mediaType="application/json" id="253a33ca-cef2-4be1-aacf-a4b8246ffadb">
+                    <con:settings>
+                        <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/>
+                        </con:setting>
+                    </con:settings>
+                    <con:endpoint>http://localhost:8080</con:endpoint>
+                    <con:request/>
+                    <con:credentials>
+                        <con:authType>Global HTTP Settings</con:authType>
+                    </con:credentials>
+                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+                    <con:jmsPropertyConfig/>
+                    <con:parameters/>
+                </con:request>
+            </con:method>
+            <con:method name="" method="PUT" id="3a20ccaf-b63b-4bcf-8a2f-3435b4983a72">
+                <con:settings/>
+                <con:parameters/>
+                <con:representation type="REQUEST">
+                    <con:mediaType>application/json</con:mediaType>
+                    <con:params/>
+                </con:representation>
+                <con:representation type="FAULT">
+                    <con:mediaType>text/html;charset=utf-8</con:mediaType>
+                    <con:status>500 405</con:status>
+                    <con:params/>
+                    <con:element>html</con:element>
+                </con:representation>
+                <con:representation type="RESPONSE">
+                    <con:mediaType>application/json</con:mediaType>
+                    <con:status>201</con:status>
+                    <con:params/>
+                    <con:element xmlns:user="http://localhost/topjava/rest/admin/users">user:Response</con:element>
+                </con:representation>
+                <con:representation type="RESPONSE">
+                    <con:mediaType xsi:nil="true"/>
+                    <con:status>200</con:status>
+                    <con:params/>
+                    <con:element>data</con:element>
+                </con:representation>
+                <con:representation type="RESPONSE">
+                    <con:mediaType xsi:nil="true"/>
+                    <con:status>200</con:status>
+                    <con:params/>
+                    <con:element>data</con:element>
+                </con:representation>
+                <con:representation type="RESPONSE">
+                    <con:mediaType xsi:nil="true"/>
+                    <con:status>200</con:status>
+                    <con:params/>
+                    <con:element>data</con:element>
+                </con:representation>
+                <con:representation type="RESPONSE">
+                    <con:mediaType xsi:nil="true"/>
+                    <con:status>200</con:status>
+                    <con:params/>
+                    <con:element>data</con:element>
+                </con:representation>
+                <con:request name="Update" mediaType="application/json" postQueryString="false" id="ad909310-5718-499e-9b5f-5ce527f0ccba">
+                    <con:settings>
+                        <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/>
+                        </con:setting>
+                    </con:settings>
+                    <con:endpoint>http://localhost:8080</con:endpoint>
+                    <con:request>{
+                        "name": "New777",
+                        "email": "new777@yandex.ru",
+                        "password": "passwordNew",
+                        "roles": ["ROLE_USER"]
+                        }
+                    </con:request>
+                    <con:credentials>
+                        <con:authType>Global HTTP Settings</con:authType>
+                    </con:credentials>
+                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+                    <con:jmsPropertyConfig/>
+                    <con:parameters/>
+                </con:request>
+            </con:method>
+            <con:method name="" method="DELETE" id="c161cb45-2e6b-49ce-8de4-87604980d474">
+                <con:settings/>
+                <con:parameters/>
+                <con:representation type="RESPONSE">
+                    <con:mediaType xsi:nil="true"/>
+                    <con:status>200</con:status>
+                    <con:params/>
+                    <con:element>data</con:element>
+                </con:representation>
+                <con:representation type="FAULT">
+                    <con:mediaType>text/html;charset=utf-8</con:mediaType>
+                    <con:status>500</con:status>
+                    <con:params/>
+                    <con:element>html</con:element>
+                </con:representation>
+                <con:request name="Delete" mediaType="application/json" id="370915d6-4b29-4cda-8e46-ed2d13ac477b">
+                    <con:settings>
+                        <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/>
+                        </con:setting>
+                    </con:settings>
+                    <con:endpoint>http://localhost:8080</con:endpoint>
+                    <con:request/>
+                    <con:credentials>
+                        <con:authType>Global HTTP Settings</con:authType>
+                    </con:credentials>
+                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+                    <con:jmsPropertyConfig/>
+                    <con:parameters/>
+                </con:request>
+            </con:method>
+        </con:resource>
+    </con:interface>
+    <con:properties/>
+    <con:wssContainer/>
+    <con:oAuth2ProfileContainer/>
+    <con:oAuth1ProfileContainer/><con:sensitiveInformation/>
+</con:soapui-project>

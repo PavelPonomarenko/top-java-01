@@ -25,6 +25,9 @@
         <constructor-arg name="scriptLocation" value="classpath:db/populateDB.sql"/>
     </bean>
 
+    <tx:annotation-driven/>
+
+
     <beans profile="hsqldb">
         <context:property-placeholder location="classpath:db/hsqldb.properties" system-properties-mode="OVERRIDE"/>
         <bean id="dataSource"
@@ -53,6 +56,12 @@
         <bean id="namedJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
             <constructor-arg ref="dataSource"/>
         </bean>
+
+        <bean id="transactionManager"
+              class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+            <property name="dataSource" ref="dataSource"/>
+        </bean>
+
     </beans>
 
     <beans profile="datajpa,jpa">
@@ -83,7 +92,6 @@
             </property>
         </bean>
 
-        <tx:annotation-driven/>
         <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
               p:entityManagerFactory-ref="entityManagerFactory"/>
 

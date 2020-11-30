@@ -1,7 +1,6 @@
 package com.gmail.ponomarenko.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.Email;
@@ -20,7 +19,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
@@ -55,7 +56,7 @@ public class User extends NamedEntity {
     protected boolean enabled = true;
 
     @Column(name = "registered", columnDefinition = "timestamp default now()")
-    @NotEmpty
+    @NotNull
     protected Date registered = new Date();
 
     @Enumerated(EnumType.STRING)
@@ -63,7 +64,6 @@ public class User extends NamedEntity {
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JsonIgnore
     protected Set<Role> roles;
 
     public User() {
@@ -97,6 +97,10 @@ public class User extends NamedEntity {
         this.password = password;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public Date getRegistered() {
         return registered;
     }
@@ -117,18 +121,13 @@ public class User extends NamedEntity {
         return roles;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public void setRoles(Role... authorities) {
-        setRoles(EnumSet.copyOf(Arrays.asList(authorities)));
+        setRoles(Arrays.asList(authorities));
     }
 
-    public void setRoles(Set<Role> authorities) {
-        this.roles = Collections.unmodifiableSet(authorities);
+    public void setRoles(Collection<Role> authorities) {
+        this.roles = Collections.unmodifiableSet(EnumSet.copyOf(authorities));
     }
-
 
     @Override
     public String toString() {

@@ -1,5 +1,6 @@
 package com.gmail.ponomarenko.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gmail.ponomarenko.util.TimeUtil;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -43,6 +44,7 @@ public class UserMeal extends BaseEntity {
     @Column(name = "calories")
     protected int calories;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     protected User user;
@@ -69,7 +71,6 @@ public class UserMeal extends BaseEntity {
         this.dateTime = dateTime;
     }
 
-
     public String getDescription() {
         return description;
     }
@@ -86,7 +87,6 @@ public class UserMeal extends BaseEntity {
         return user;
     }
 
-
     public void setCalories(int calories) {
         this.calories = calories;
     }
@@ -99,7 +99,6 @@ public class UserMeal extends BaseEntity {
     public String toString() {
         return "Meal(" + id + ", " + TimeUtil.toString(dateTime) + ", '" + description + "', calories:" + calories + ')';
     }
-
 
     @Override
     public boolean equals(Object o) {

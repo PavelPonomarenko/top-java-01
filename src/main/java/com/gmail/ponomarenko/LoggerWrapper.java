@@ -57,8 +57,19 @@ public class LoggerWrapper {
         logger.error(msg);
         return new UnsupportedOperationException(msg);
     }
+
     public NotFoundException getNotFoundException(String reason) {
         logger.error("Not data found ");
         return new NotFoundException(reason);
     }
+
+    public IllegalArgumentException getIllegalArgumentException(String msg) {
+        return getIllegalArgumentException(msg, null);
+    }
+
+    public IllegalArgumentException getIllegalArgumentException(String msg, Throwable e) {
+        logger.error(msg, e);
+        return new IllegalArgumentException(msg, e);
+    }
+
 }

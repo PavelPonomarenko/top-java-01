@@ -5,6 +5,7 @@ import com.gmail.ponomarenko.repository.UserMealRepository;
 import com.gmail.ponomarenko.util.exception.ExceptionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,7 +28,7 @@ public class UserMealServiceImpl implements UserMealService {
 
     @Override
     public List<UserMeal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
-        return repository.getBetween(startDate, endDate, userId);
+        return repository.getBetween(startDate, StringUtils.isEmpty(endDate) ? LocalDateTime.now() : endDate, userId);
     }
 
     @Override
