@@ -2,6 +2,7 @@ package com.gmail.ponomarenko.service;
 
 import com.gmail.ponomarenko.model.User;
 import com.gmail.ponomarenko.repository.UserRepository;
+import com.gmail.ponomarenko.to.UserTo;
 import com.gmail.ponomarenko.util.exception.ExceptionUtil;
 import com.gmail.ponomarenko.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -56,5 +58,25 @@ public class UserServiceImpl implements UserService {
 
     @CacheEvict(value = "users", allEntries = true)
     public void evictCache() {
+    }
+
+    @CacheEvict(value = "users", allEntries = true)
+    @Override
+    @Transactional
+    public void save(UserTo userTo) {
+        if (userTo.getId() == 0) {
+            save(userTo.asNewUser());
+        } else {
+            User user = get(userTo.getId());
+            userTo.updateUser(user);
+            save(user);
+        }
+    }
+
+
+    @CacheEvict(value = "users", allEntries = true)
+    @Override
+    public void enable(int id, boolean enable) {
+        repository.enable(id, enable);
     }
 }

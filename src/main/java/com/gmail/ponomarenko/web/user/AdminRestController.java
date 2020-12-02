@@ -19,8 +19,9 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rest/admin/users")
+@RequestMapping(AdminRestController.REST_URL)
 public class AdminRestController {
+    static final String REST_URL = "/rest/admin/users";
     private static final LoggerWrapper LOG = LoggerWrapper.get(ProfileRestController.class);
 
     @Autowired
@@ -40,7 +41,7 @@ public class AdminRestController {
     public ResponseEntity<User> create(@RequestBody User user) {
         User created = helper.create(user);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/rest/admin/users/{id}")
+                .path(REST_URL + "/{id}")
                 .buildAndExpand(created.getId()).toUri();
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setLocation(uriOfNewResource);

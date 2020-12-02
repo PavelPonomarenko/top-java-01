@@ -37,16 +37,25 @@ public class UserHelper {
 
     public void update(User user, int id) {
         LOG.info("update " + user);
-        if (user.isNew()) {
-            user.setId(id);
-        } else if (id != user.getId()) {
-            throw LOG.getIllegalStateException(user + " has id differed from " + id);
-        }
+        user.update(id);
         service.update(user);
+
+
+//        if (user.isNew()) {
+//            user.setId(id);
+//        } else if (id != user.getId()) {
+//            throw LOG.getIllegalStateException(user + " has id differed from " + id);
+//        }
     }
 
     public User getByMail(String email) {
         LOG.info("getByEmail " + email);
         return service.getByEmail(email);
     }
+
+    public void enable(int id, boolean enable) {
+        LOG.info("enable " + id);
+        service.enable(id, enable);
+    }
 }
+

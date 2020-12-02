@@ -38,7 +38,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 public class UserMealRestControllerTest extends WebTest {
 
-    public static final String REST_URL = "/rest/profile/meals/";
+    public static final String REST_URL = UserMealRestController.REST_URL + "/";
 
     @Autowired
     private UserMealService service;

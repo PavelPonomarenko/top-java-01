@@ -19,8 +19,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rest/profile/meals")
+//@RequestMapping("/rest/profile/meals")
+@RequestMapping(UserMealRestController.REST_URL)
 public class UserMealRestController {
+    public static final String REST_URL = "/rest/profile/meals";
     @Autowired
     private UserMealHelper helper;
 
@@ -61,7 +63,7 @@ public class UserMealRestController {
         UserMeal created = helper.create(meal);
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/rest/profile/meals/{id}")
+                .path(REST_URL + "/{id}")
                 .buildAndExpand(created.getId()).toUri();
 
         HttpHeaders httpHeaders = new HttpHeaders();
