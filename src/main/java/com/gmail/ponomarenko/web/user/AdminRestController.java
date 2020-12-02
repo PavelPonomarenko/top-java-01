@@ -1,5 +1,6 @@
 package com.gmail.ponomarenko.web.user;
 
+import com.gmail.ponomarenko.LoggedUser;
 import com.gmail.ponomarenko.LoggerWrapper;
 import com.gmail.ponomarenko.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ public class AdminRestController {
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<User> getAll() {
+        LoggedUser.safeGet();
         return helper.getAll();
     }
 

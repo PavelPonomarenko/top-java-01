@@ -1,5 +1,6 @@
 package com.gmail.ponomarenko.service;
 
+import com.gmail.ponomarenko.LoggedUser;
 import com.gmail.ponomarenko.model.User;
 import com.gmail.ponomarenko.repository.UserRepository;
 import com.gmail.ponomarenko.to.UserTo;
@@ -8,13 +9,16 @@ import com.gmail.ponomarenko.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Service
-public class UserServiceImpl implements UserService {
+@Service("userService")
+public class UserServiceImpl implements UserService, UserDetailsService {
 
 
     @Autowired
@@ -79,4 +83,14 @@ public class UserServiceImpl implements UserService {
     public void enable(int id, boolean enable) {
         repository.enable(id, enable);
     }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User u = repository.getByEmail(email);
+        if (u == null) {
+            throw new UsernameNotFoundException("User " + email + " is not found");
+        }
+        return new LoggedUser(u);
+    }
 }
+
