@@ -29,7 +29,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles({HSQLDB, DATAJPA})
 public class ProfileRestControllerTest extends WebTest {
 
-    //    public static final String REST_URL = "/rest/profile/";
     public static final String REST_URL = ProfileRestController.REST_URL + '/';
     @Autowired
     private UserService service;

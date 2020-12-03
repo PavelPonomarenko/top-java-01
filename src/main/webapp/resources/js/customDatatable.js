@@ -55,6 +55,7 @@ function deleteRow(id) {
         }
     });
 }
+
 function enable(id, chkbox) {
     var enabled = chkbox.is(":checked");
     chkbox.parent().parent().css("text-decoration", enabled ? "none" : "line-through");
@@ -114,7 +115,7 @@ function successNoty(text) {
 function failNoty(event, jqXHR, options, jsExc) {
     closeNote();
     failedNote = noty({
-        text: 'Failed: ' + jqXHR.statusText + "<br>",
+        text: 'Failed: ' + jqXHR.statusText + "<br>" + jqXHR.responseJSON,
         type: 'error',
         layout: 'bottomRight'
     });

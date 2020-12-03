@@ -88,9 +88,5 @@
        $(function () {
            makeEditable();
        });
-
-    // function specialUpdate() {
-    //
-    // }
 </script>
 </html>

@@ -20,7 +20,6 @@ import java.util.List;
 @Service("userService")
 public class UserServiceImpl implements UserService, UserDetailsService {
 
-
     @Autowired
     public UserRepository repository;
 
@@ -76,7 +75,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             save(user);
         }
     }
-
 
     @CacheEvict(value = "users", allEntries = true)
     @Override

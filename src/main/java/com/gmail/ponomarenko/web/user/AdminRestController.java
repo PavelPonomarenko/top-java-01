@@ -22,6 +22,7 @@ import java.util.List;
 @RestController
 @RequestMapping(AdminRestController.REST_URL)
 public class AdminRestController {
+
     static final String REST_URL = "/rest/admin/users";
     private static final LoggerWrapper LOG = LoggerWrapper.get(ProfileRestController.class);
 

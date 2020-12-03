@@ -19,9 +19,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-//@RequestMapping("/rest/profile/meals")
 @RequestMapping(UserMealRestController.REST_URL)
 public class UserMealRestController {
+
     public static final String REST_URL = "/rest/profile/meals";
     @Autowired
     private UserMealHelper helper;

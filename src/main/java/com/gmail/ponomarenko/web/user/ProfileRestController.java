@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(ProfileRestController.REST_URL)
 public class ProfileRestController {
+
     public static final String REST_URL = "/rest/profile";
 
     @Autowired

@@ -13,6 +13,7 @@ import java.util.List;
 
 @Component
 public class UserMealHelper {
+
     private static final LoggerWrapper LOG = LoggerWrapper.get(UserMealHelper.class);
 
     @Autowired

@@ -1,17 +1,7 @@
-<%--<%@page contentType="text/html" pageEncoding="UTF-8" %>--%>
-<%--<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>--%>
-
-<%--&lt;%&ndash;<fmt:setBundle basename="messages/app"/>&ndash;%&gt;--%>
-
-<%--<header><fmt:message key="app.title"/></header>--%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 
-<%--
-<fmt:setLocale value="ru"/>
-<fmt:setBundle basename="messages.app"/>
---%>
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
 

@@ -1,6 +1,7 @@
 package com.gmail.ponomarenko.model;
 
 
+import com.gmail.ponomarenko.util.HasPassword;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.Email;
@@ -36,7 +37,7 @@ import java.util.Set;
 })
 
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE, region = "users")
-public class User extends NamedEntity {
+public class User extends NamedEntity implements HasPassword {
 
     public static final String DELETE = "User.delete";
     public static final String ALL_SORTED = "User.getAllSorted";

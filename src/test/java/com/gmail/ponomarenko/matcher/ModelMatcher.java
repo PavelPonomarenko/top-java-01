@@ -18,7 +18,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class ModelMatcher<T, R> {
 
     protected Function<T, R> entityConverter;
-
     protected Class<T> entityClass;
 
     public ModelMatcher(Function<T, R> entityConverter, Class<T> entityClass) {

@@ -27,7 +27,6 @@
 
     <tx:annotation-driven/>
 
-
     <beans profile="hsqldb">
         <context:property-placeholder location="classpath:db/hsqldb.properties" system-properties-mode="OVERRIDE"/>
         <bean id="dataSource"

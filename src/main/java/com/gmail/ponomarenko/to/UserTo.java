@@ -2,12 +2,13 @@ package com.gmail.ponomarenko.to;
 
 import com.gmail.ponomarenko.model.Role;
 import com.gmail.ponomarenko.model.User;
+import com.gmail.ponomarenko.util.HasPassword;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Size;
 
-public class UserTo {
+public class UserTo implements HasPassword {
     protected int id;
 
     @NotEmpty
@@ -36,6 +37,7 @@ public class UserTo {
         this.email = email;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }

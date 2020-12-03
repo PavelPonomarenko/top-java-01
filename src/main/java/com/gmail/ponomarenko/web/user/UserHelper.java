@@ -3,6 +3,7 @@ package com.gmail.ponomarenko.web.user;
 import com.gmail.ponomarenko.LoggerWrapper;
 import com.gmail.ponomarenko.model.User;
 import com.gmail.ponomarenko.service.UserService;
+import com.gmail.ponomarenko.util.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,7 +28,7 @@ public class UserHelper {
 
     public User create(User user) {
         LOG.info("create " + user);
-        return service.save(user);
+        return service.save(PasswordUtil.getEncoded(user));
     }
 
     public void delete(int id) {
@@ -38,14 +39,7 @@ public class UserHelper {
     public void update(User user, int id) {
         LOG.info("update " + user);
         user.update(id);
-        service.update(user);
-
-
-//        if (user.isNew()) {
-//            user.setId(id);
-//        } else if (id != user.getId()) {
-//            throw LOG.getIllegalStateException(user + " has id differed from " + id);
-//        }
+        service.update(PasswordUtil.getEncoded(user));
     }
 
     public User getByMail(String email) {

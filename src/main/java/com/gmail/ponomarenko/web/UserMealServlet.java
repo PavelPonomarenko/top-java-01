@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class UserMealServlet extends HttpServlet {
+
     private static final LoggerWrapper LOG = LoggerWrapper.get(UserMealServlet.class);
     private WebApplicationContext wac;
 

@@ -24,5 +24,5 @@ public interface UserService {
 
     void save(UserTo userTo);
 
-   void enable(int id, boolean enable);
+    void enable(int id, boolean enable);
 }

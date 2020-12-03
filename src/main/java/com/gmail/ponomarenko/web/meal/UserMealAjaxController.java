@@ -44,12 +44,5 @@ public class UserMealAjaxController {
         if (id == 0) {
             helper.create(meal);
         }
-
-//        if (id == 0) {
-//            meal.setId(null);
-//            helper.create(meal);
-//        } else {
-//            helper.update(meal, id);
-//        }
     }
 }

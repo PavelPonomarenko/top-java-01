@@ -4,12 +4,15 @@ import com.gmail.ponomarenko.matcher.ModelMatcher;
 import com.gmail.ponomarenko.model.BaseEntity;
 import com.gmail.ponomarenko.model.Role;
 import com.gmail.ponomarenko.model.User;
+import com.gmail.ponomarenko.util.PasswordUtil;
 
 import java.util.EnumSet;
 import java.util.Objects;
 import java.util.Set;
 
 public class UserTestData {
+
+    private static final LoggerWrapper LOG = LoggerWrapper.get(UserTestData.class);
 
     public static final TestUser USER = new TestUser(BaseEntity.START_SEQ, "User", "user@yandex.ru", "password", true, Role.ROLE_USER);
     public static final User ADMIN = new TestUser(BaseEntity.START_SEQ + 1, "Admin", "admin@gmail.com", "admin", true, Role.ROLE_ADMIN);
@@ -40,7 +43,6 @@ public class UserTestData {
             return new User(this);
         }
 
-
         @Override
         public String toString() {
             return "User (" +
@@ -57,16 +59,24 @@ public class UserTestData {
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
-
             TestUser that = (TestUser) o;
-
-            return Objects.equals(this.password, that.password)
+            return comparePassword(this.password, that.password)
                     && Objects.equals(this.id, that.id)
                     && Objects.equals(this.name, that.name)
                     && Objects.equals(this.email, that.email)
                     && Objects.equals(this.enabled, that.enabled)
                     && Objects.equals(this.roles, that.roles);
         }
+    }
+
+    private static boolean comparePassword(String rawPassword, String password) {
+        if (PasswordUtil.isPasswordEncoded(rawPassword)) {
+            LOG.warn("Expected password couldn't be compared with actual");
+        } else if (!PasswordUtil.isPasswordMatch(rawPassword, password)) {
+            LOG.error("Password " + password + " doesn't match encoded " + password);
+            return false;
+        }
+        return true;
     }
 
     public static final ModelMatcher<User, TestUser> MATCHER = new ModelMatcher<>(

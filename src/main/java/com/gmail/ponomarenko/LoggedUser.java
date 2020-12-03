@@ -36,7 +36,6 @@ public class LoggedUser implements UserDetails {
 
     public static int id() {
         return BaseEntity.START_SEQ;
-//        return get().user.getId();
     }
 
     @Override
@@ -74,68 +73,3 @@ public class LoggedUser implements UserDetails {
         return user.isEnabled();
     }
 }
-//
-////    protected int id = BaseEntity.START_SEQ;
-//
-//    protected Set<Role> roles = Collections.singleton(Role.ROLE_USER);
-//
-//    protected boolean enabled = true;
-//    public LoggedUser(User user) {
-//        this.user = user;
-//    }
-//
-//    private static LoggedUser LOGGED_USER = new LoggedUser();
-//
-//    public static LoggedUser get() {
-//        return LOGGED_USER;
-//    }
-//
-//    public static int id() {
-//        return get().id;
-//    }
-//
-//    public static Object safeGet() {
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        if (auth == null) {
-//            return null;
-//        }
-//        Object user = auth.getPrincipal();
-//        return (user instanceof LoggedUser) ? (LoggedUser) user : null;
-//    }
-//
-//
-//
-//
-//    public Set<Role> getAuthorities() {
-//        return roles;
-//    }
-//
-//    @Override
-//    public String getPassword() {
-//        return null;
-//    }
-//
-//    @Override
-//    public String getUsername() {
-//        return null;
-//    }
-//
-//    @Override
-//    public boolean isAccountNonExpired() {
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean isAccountNonLocked() {
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean isCredentialsNonExpired() {
-//        return false;
-//    }
-//
-//    public boolean isEnabled() {
-//        return enabled;
-//    }
-

@@ -77,11 +77,9 @@ public class UserMealRestControllerTest extends WebTest {
     @Test
     public void testUpdate() throws Exception {
         UserMeal updated = getUpdated();
-
         mockMvc.perform(put(REST_URL + MEAL1_ID).contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(updated)))
                 .andExpect(status().isOk());
-
         assertEquals(updated, service.get(MEAL1_ID, START_SEQ));
     }
 
@@ -91,12 +89,9 @@ public class UserMealRestControllerTest extends WebTest {
         ResultActions action = mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(created)));
-
         UserMeal returned = MATCHER.fromJsonAction(action);
         created.setId(returned.getId());
-
         MATCHER.assertEquals(created, returned);
         MATCHER.assertListEquals(Arrays.asList(created, MEAL4, MEAL3, MEAL2, MEAL1), service.getAll(START_SEQ));
     }
-
 }

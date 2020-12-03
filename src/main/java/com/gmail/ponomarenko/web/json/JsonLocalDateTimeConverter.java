@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 
 
 public class JsonLocalDateTimeConverter {
+
     public static class UserSettingSerializer extends JsonSerializer<LocalDateTime> {
         @Override
         public void serialize(LocalDateTime ldt, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonProcessingException {

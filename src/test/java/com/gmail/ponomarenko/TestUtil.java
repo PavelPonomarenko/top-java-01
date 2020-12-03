@@ -19,14 +19,9 @@ public class TestUtil {
         return action.andReturn().getResponse().getContentAsString();
     }
 
-    //    public static RequestPostProcessor userHttpBasic(User user) {
-//        return SecurityMockMvcRequestPostProcessors.httpBasic(user.getEmail(), user.getPassword());
-//
-//    }
     public static RequestPostProcessor userHttpBasic(User user) {
         return SecurityMockMvcRequestPostProcessors.httpBasic(user.getEmail(), user.getPassword());
     }
-
 
     public static class ToStringModelMatcher<T> extends ModelMatcher<T, String> {
         public ToStringModelMatcher(Class<T> entityClass) {
