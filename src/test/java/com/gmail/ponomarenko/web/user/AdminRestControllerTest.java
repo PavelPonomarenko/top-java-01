@@ -18,6 +18,7 @@ import java.util.Collections;
 
 import static com.gmail.ponomarenko.Profiles.DATAJPA;
 import static com.gmail.ponomarenko.Profiles.HSQLDB;
+import static com.gmail.ponomarenko.TestUtil.userHttpBasic;
 import static com.gmail.ponomarenko.UserTestData.ADMIN;
 import static com.gmail.ponomarenko.UserTestData.MATCHER;
 import static com.gmail.ponomarenko.UserTestData.USER;
@@ -41,6 +42,7 @@ public class AdminRestControllerTest extends WebTest {
     @Test
     public void testGet() throws Exception {
         mockMvc.perform(get(REST_URL + (START_SEQ + 1)))
+                .with(userHttpBasic(ADMIN))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))

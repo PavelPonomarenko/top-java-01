@@ -10,6 +10,13 @@
     <artifactId>mealservice</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <url>http://repo.springsource.org/libs-milestone/</url>
+        </repository>
+    </repositories>
+
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -48,10 +55,17 @@
         <webjars-datatables.version>1.9.4-2</webjars-datatables.version>
 
         <spring-security.version>3.2.5.RELEASE</spring-security.version>
+<!--        <spring-security-test.version>4.0.0.RC1</spring-security-test.version>-->
+        <spring-security-test.version>4.0.1.RELEASE</spring-security-test.version>
     </properties>
 
     <dependencies>
         <!--security-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <version>${spring-security-test.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
@@ -260,16 +274,7 @@
     </dependencies>
 
     <profiles>
-        <!--        <profile>-->
-        <!--            <id>hsqldb</id>-->
-        <!--            <dependencies>-->
-        <!--                <dependency>-->
-        <!--                    <groupId>org.hsqldb</groupId>-->
-        <!--                    <artifactId>hsqldb</artifactId>-->
-        <!--                    <version>${hsqldb.version}</version>-->
-        <!--                </dependency>-->
-        <!--            </dependencies>-->
-        <!--        </profile>-->
+
         <profile>
             <id>postgres</id>
             <dependencies>
@@ -304,10 +309,7 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <!--            <plugin>-->
-            <!--                <groupId>org.apache.maven.plugins</groupId>-->
-            <!--                <artifactId>maven-war-plugin</artifactId>-->
-            <!--            </plugin>-->
+
 
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
