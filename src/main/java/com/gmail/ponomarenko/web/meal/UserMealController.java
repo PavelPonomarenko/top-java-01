@@ -1,6 +1,5 @@
 package com.gmail.ponomarenko.web.meal;
 
-import com.gmail.ponomarenko.model.BaseEntity;
 import com.gmail.ponomarenko.service.UserMealService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,9 +14,9 @@ public class UserMealController {
     private UserMealService userMealService;
 
     @RequestMapping(value = "/meals", method = RequestMethod.GET)
-    public String userMealList(Model model) {
-        model.addAttribute("userMealList", userMealService.getAll(BaseEntity.START_SEQ));
-        return "userMealList";
+    public String mealList(Model model) {
+//        model.addAttribute("userMealList", userMealService.getAll(BaseEntity.START_SEQ));
+        return "mealList";
     }
 
 }

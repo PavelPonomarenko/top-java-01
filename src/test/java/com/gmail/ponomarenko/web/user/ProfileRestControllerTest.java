@@ -1,6 +1,5 @@
 package com.gmail.ponomarenko.web.user;
 
-import com.gmail.ponomarenko.LoggedUser;
 import com.gmail.ponomarenko.TestUtil;
 import com.gmail.ponomarenko.model.Role;
 import com.gmail.ponomarenko.model.User;
@@ -16,6 +15,7 @@ import java.util.Arrays;
 
 import static com.gmail.ponomarenko.Profiles.DATAJPA;
 import static com.gmail.ponomarenko.Profiles.HSQLDB;
+import static com.gmail.ponomarenko.TestUtil.userHttpBasic;
 import static com.gmail.ponomarenko.UserTestData.ADMIN;
 import static com.gmail.ponomarenko.UserTestData.MATCHER;
 import static com.gmail.ponomarenko.UserTestData.USER;
@@ -29,34 +29,77 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles({HSQLDB, DATAJPA})
 public class ProfileRestControllerTest extends WebTest {
 
+
     public static final String REST_URL = ProfileRestController.REST_URL + '/';
+
     @Autowired
     private UserService service;
 
     @Test
     public void testGet() throws Exception {
-        TestUtil.print(mockMvc.perform(get(REST_URL))
+        TestUtil.print(mockMvc.perform(get(REST_URL)
+                .with(userHttpBasic(USER)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MATCHER.contentMatcher(USER)));
     }
 
+
+    @Test
+    public void testGetUnauth() throws Exception {
+        mockMvc.perform(get(REST_URL).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isUnauthorized());
+    }
+
     @Test
     public void testDelete() throws Exception {
-        mockMvc.perform(delete(REST_URL).contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(delete(REST_URL).contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(USER)))
                 .andExpect(status().isOk());
         MATCHER.assertListEquals(Arrays.asList(ADMIN), service.getAll());
     }
 
     @Test
     public void testUpdate() throws Exception {
-        User updated = new User(LoggedUser.id(), "newName", "newEmail", "newPassword", true, Role.ROLE_USER);
+        User updated = new User(USER.getId(), "newName", "newEmail", "newPassword", true, Role.ROLE_USER);
         mockMvc.perform(put(REST_URL).contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(USER))
                 .content(JsonUtil.writeValue(updated)))
                 .andDo(print())
                 .andExpect(status().isOk());
 
-        MATCHER.assertEquals(updated, new User(service.get(LoggedUser.id())));
+        MATCHER.assertEquals(updated, new User(service.get(USER.getId())));
     }
 }
+//
+//    public static final String REST_URL = ProfileRestController.REST_URL + '/';
+//    @Autowired
+//    private UserService service;
+//
+//    @Test
+//    public void testGet() throws Exception {
+//        TestUtil.print(mockMvc.perform(get(REST_URL))
+//                .andExpect(status().isOk())
+//                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(MATCHER.contentMatcher(USER)));
+//    }
+//
+//    @Test
+//    public void testDelete() throws Exception {
+//        mockMvc.perform(delete(REST_URL).contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk());
+//        MATCHER.assertListEquals(Arrays.asList(ADMIN), service.getAll());
+//    }
+//
+//    @Test
+//    public void testUpdate() throws Exception {
+//        User updated = new User(LoggedUser.id(), "newName", "newEmail", "newPassword", true, Role.ROLE_USER);
+//        mockMvc.perform(put(REST_URL).contentType(MediaType.APPLICATION_JSON)
+//                .content(JsonUtil.writeValue(updated)))
+//                .andDo(print())
+//                .andExpect(status().isOk());
+//
+//        MATCHER.assertEquals(updated, new User(service.get(LoggedUser.id())));
+//    }
+
 

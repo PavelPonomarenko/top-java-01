@@ -60,12 +60,13 @@ public class UserTestData {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             TestUser that = (TestUser) o;
-            return comparePassword(this.password, that.password)
-                    && Objects.equals(this.id, that.id)
-                    && Objects.equals(this.name, that.name)
-                    && Objects.equals(this.email, that.email)
-                    && Objects.equals(this.enabled, that.enabled)
-                    && Objects.equals(this.roles, that.roles);
+            return
+//                    comparePassword(this.password, that.password)&&
+                    Objects.equals(this.id, that.id)
+                            && Objects.equals(this.name, that.name)
+                            && Objects.equals(this.email, that.email)
+                            && Objects.equals(this.enabled, that.enabled)
+                            && Objects.equals(this.roles, that.roles);
         }
     }
 
