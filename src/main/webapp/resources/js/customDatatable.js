@@ -3,14 +3,24 @@ var form;
 function makeEditable(ajaxUrl) {
     form = $('#detailsForm')
 
-
     $('#add').click(function () {
+        form.find(":input").each(function () {
+            $(this).val("");
+        });
         $('#id').val(0);
         $('#editRow').modal();
-    });
 
-    $('.delete').click(function () {
-        deleteRow($(this).attr("id"));
+
+        // form = $('#detailsForm')
+        //
+        //
+        // $('#add').click(function () {
+        //     $('#id').val(0);
+        //     $('#editRow').modal();
+        // });
+        //
+        // $('.delete').click(function () {
+        //     deleteRow($(this).attr("id"));
     });
 
     $('.update').click(function () {
@@ -32,7 +42,9 @@ function makeEditable(ajaxUrl) {
     $(document).ajaxError(function (event, jqXHR, options, jsExc) {
         failNoty(event, jqXHR, options, jsExc);
     });
-    specialUpdate();
+    // specialUpdate();
+
+    init();
 }
 
 
@@ -69,15 +81,22 @@ function enable(id, chkbox) {
     });
 }
 
-function updateTable() {
-    $.get(ajaxUrl, function (data) {
-        oTable_datatable.fnClearTable();
-        $.each(data, function (key, item) {
-            oTable_datatable.fnAddData(item);
-        });
-        oTable_datatable.fnDraw();
+// function updateTable() {
+//     $.get(ajaxUrl, function (data) {
+//         oTable_datatable.fnClearTable();
+//         $.each(data, function (key, item) {
+//             oTable_datatable.fnAddData(item);
+//         });
+//         oTable_datatable.fnDraw();
+//     });
+//     specialUpdate();
+// }
+function updateByData(data) {
+    oTable_datatable.fnClearTable();
+    $.each(data, function (key, item) {
+        oTable_datatable.fnAddData(item);
     });
-    specialUpdate();
+    oTable_datatable.fnDraw();
 }
 
 function save() {
